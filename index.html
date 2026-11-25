@@ -13,9 +13,9 @@
       --bg-canvas: #090d16;
       --bg-surface: #111827;
       --bg-surface-2: #172033;
-      --bg-glass: rgba(17, 24, 39, 0.82);
+      --bg-glass: rgba(17, 24, 39, 0.84);
       --border: rgba(148, 163, 184, 0.14);
-      --border-strong: rgba(56, 189, 248, 0.35);
+      --border-strong: rgba(56, 189, 248, 0.38);
       --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
       --text-muted: #64748b;
@@ -31,15 +31,8 @@
       --radius-sm: 10px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -54,11 +47,9 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    code, .mono, .stat-num {
-      font-family: 'JetBrains Mono', monospace;
-    }
+    code, .mono, .stat-num { font-family: 'JetBrains Mono', monospace; }
 
-    /* Top Navigation Bar */
+    /* Top Bar */
     .topbar {
       position: sticky;
       top: 0;
@@ -84,8 +75,6 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      text-decoration: none;
-      color: var(--text-primary);
       cursor: pointer;
     }
 
@@ -98,18 +87,8 @@
       box-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
     }
 
-    .brand-title {
-      font-weight: 800;
-      font-size: 1.05rem;
-      letter-spacing: -0.02em;
-    }
-
-    .brand-sub {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      display: block;
-      font-weight: 500;
-    }
+    .brand-title { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.02em; }
+    .brand-sub { font-size: 0.72rem; color: var(--text-muted); display: block; font-weight: 500; }
 
     .nav-pills {
       display: flex;
@@ -137,48 +116,25 @@
       transition: all 0.18s ease;
     }
 
-    .nav-btn:hover {
-      color: var(--text-primary);
-      background: rgba(255, 255, 255, 0.04);
-    }
+    .nav-btn:hover { color: var(--text-primary); background: rgba(255, 255, 255, 0.04); }
 
     .nav-btn.active {
       color: #06101d;
       background: linear-gradient(135deg, var(--accent-cyan), var(--accent-emerald));
-      border-color: transparent;
       box-shadow: 0 6px 20px rgba(56, 189, 248, 0.28);
     }
 
-    /* Main Container */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 32px 24px 72px;
-    }
-
-    .view-section {
-      display: none;
-      animation: fadeSlideIn 0.28s ease;
-    }
-
-    .view-section.active {
-      display: block;
-    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 32px 24px 72px; }
+    .view-section { display: none; animation: fadeSlideIn 0.25s ease; }
+    .view-section.active { display: block; }
 
     @keyframes fadeSlideIn {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Cards & Surfaces */
     .card {
-      background: linear-gradient(180deg, rgba(23, 32, 51, 0.85), rgba(17, 24, 39, 0.92));
+      background: linear-gradient(180deg, rgba(23, 32, 51, 0.86), rgba(17, 24, 39, 0.94));
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 24px;
@@ -203,39 +159,14 @@
       margin-bottom: 4px;
     }
 
-    .section-heading {
-      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-    }
+    .section-heading { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 800; letter-spacing: -0.025em; }
+    .section-desc { color: var(--text-secondary); font-size: 0.95rem; max-width: 660px; margin-top: 6px; }
 
-    .section-desc {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      max-width: 640px;
-      margin-top: 6px;
-    }
+    /* Profile */
+    .profile-grid { display: grid; grid-template-columns: 340px 1fr; gap: 24px; align-items: start; }
+    @media (max-width: 920px) { .profile-grid { grid-template-columns: 1fr; } }
 
-    /* Profile Hero Layout */
-    .profile-grid {
-      display: grid;
-      grid-template-columns: 340px 1fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    @media (max-width: 920px) {
-      .profile-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .avatar-card {
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
+    .avatar-card { text-align: center; position: relative; overflow: hidden; }
     .avatar-card::before {
       content: "";
       position: absolute;
@@ -266,32 +197,10 @@
       display: block;
     }
 
-    .profile-name {
-      position: relative;
-      z-index: 1;
-      font-size: 1.55rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
+    .profile-name { position: relative; z-index: 1; font-size: 1.55rem; font-weight: 800; }
+    .profile-role { position: relative; z-index: 1; color: var(--accent-cyan); font-size: 0.88rem; font-weight: 600; margin-top: 4px; }
 
-    .profile-role {
-      position: relative;
-      z-index: 1;
-      color: var(--accent-cyan);
-      font-size: 0.88rem;
-      font-weight: 600;
-      margin-top: 4px;
-    }
-
-    .badge-row {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 16px;
-    }
+    .badge-row { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px; }
 
     .pill-badge {
       display: inline-flex;
@@ -303,30 +212,12 @@
       font-weight: 600;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid var(--border);
-      color: var(--text-primary);
     }
 
-    .pill-badge.emerald {
-      background: rgba(52, 211, 153, 0.12);
-      border-color: rgba(52, 211, 153, 0.3);
-      color: var(--accent-emerald);
-    }
+    .pill-badge.emerald { background: rgba(52, 211, 153, 0.12); border-color: rgba(52, 211, 153, 0.3); color: var(--accent-emerald); }
+    .pill-badge.amber { background: rgba(251, 191, 36, 0.12); border-color: rgba(251, 191, 36, 0.3); color: var(--accent-amber); }
 
-    .pill-badge.amber {
-      background: rgba(251, 191, 36, 0.12);
-      border-color: rgba(251, 191, 36, 0.3);
-      color: var(--accent-amber);
-    }
-
-    .handles-box {
-      position: relative;
-      z-index: 1;
-      margin-top: 20px;
-      display: grid;
-      gap: 10px;
-      text-align: left;
-    }
-
+    .handles-box { position: relative; z-index: 1; margin-top: 20px; display: grid; gap: 10px; text-align: left; }
     .handle-item {
       display: flex;
       align-items: center;
@@ -338,12 +229,7 @@
       border-radius: var(--radius-sm);
       font-size: 0.84rem;
     }
-
-    .handle-label {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      display: block;
-    }
+    .handle-label { font-size: 0.72rem; color: var(--text-muted); display: block; }
 
     .copy-btn {
       background: rgba(56, 189, 248, 0.14);
@@ -356,17 +242,9 @@
       cursor: pointer;
       transition: all 0.15s ease;
     }
+    .copy-btn:hover { background: rgba(56, 189, 248, 0.25); }
 
-    .copy-btn:hover {
-      background: rgba(56, 189, 248, 0.25);
-    }
-
-    .bio-card p {
-      color: #cbd5e1;
-      font-size: 1rem;
-      line-height: 1.75;
-    }
-
+    .bio-card p { color: #cbd5e1; font-size: 1rem; line-height: 1.75; }
     .age-chip {
       display: inline-flex;
       align-items: center;
@@ -394,13 +272,7 @@
       gap: 10px;
     }
 
-    .quick-nav-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 14px;
-      margin-top: 22px;
-    }
-
+    .quick-nav-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-top: 22px; }
     .quick-tile {
       background: var(--bg-surface-2);
       border: 1px solid var(--border);
@@ -411,199 +283,28 @@
       transition: all 0.2s ease;
       color: var(--text-primary);
     }
+    .quick-tile:hover { transform: translateY(-3px); border-color: var(--border-strong); background: rgba(30, 41, 66, 0.95); }
+    .quick-tile i { font-size: 1.2rem; color: var(--accent-cyan); margin-bottom: 10px; display: block; }
+    .quick-tile strong { display: block; font-size: 0.96rem; margin-bottom: 4px; }
+    .quick-tile span { font-size: 0.8rem; color: var(--text-secondary); }
 
-    .quick-tile:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-strong);
-      background: rgba(30, 41, 66, 0.95);
-    }
-
-    .quick-tile i {
-      font-size: 1.2rem;
-      color: var(--accent-cyan);
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .quick-tile strong {
-      display: block;
-      font-size: 0.96rem;
-      margin-bottom: 4px;
-    }
-
-    .quick-tile span {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    /* Games Grid */
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .filter-chip {
-      background: var(--bg-surface);
-      color: var(--text-secondary);
-      border: 1px solid var(--border);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.15s ease;
-    }
-
-    .filter-chip:hover {
-      color: var(--text-primary);
-      border-color: rgba(148, 163, 184, 0.35);
-    }
-
-    .filter-chip.active {
-      background: rgba(56, 189, 248, 0.16);
-      color: var(--accent-cyan);
-      border-color: rgba(56, 189, 248, 0.45);
-    }
-
-    .games-grid {
+    /* Games Hub & Mini-Games */
+    .featured-games-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
       gap: 18px;
+      margin-bottom: 28px;
     }
 
-    .game-card {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 20px;
+    .featured-game-card {
+      background: linear-gradient(145deg, rgba(56, 189, 248, 0.12), rgba(17, 24, 39, 0.96));
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-lg);
+      padding: 22px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 14px;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .game-card:hover {
-      transform: translateY(-3px);
-      border-color: var(--border-strong);
-    }
-
-    .game-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .game-icon-box {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      font-size: 1.15rem;
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--accent-cyan);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-    }
-
-    .role-tag {
-      font-size: 0.74rem;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-    }
-
-    .role-owned {
-      background: rgba(52, 211, 153, 0.14);
-      color: var(--accent-emerald);
-      border-color: rgba(52, 211, 153, 0.35);
-    }
-
-    .role-co {
-      background: rgba(129, 140, 248, 0.15);
-      color: var(--accent-indigo);
-      border-color: rgba(129, 140, 248, 0.35);
-    }
-
-    .role-orig {
-      background: rgba(251, 191, 36, 0.14);
-      color: var(--accent-amber);
-      border-color: rgba(251, 191, 36, 0.35);
-    }
-
-    .role-helped {
-      background: rgba(56, 189, 248, 0.13);
-      color: var(--accent-cyan);
-      border-color: rgba(56, 189, 248, 0.3);
-    }
-
-    .game-card h3 {
-      font-size: 1.12rem;
-      font-weight: 700;
-    }
-
-    .game-card p {
-      font-size: 0.86rem;
-      color: var(--text-secondary);
-    }
-
-    /* Simulator Layout */
-    .sim-layout {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 24px;
-      align-items: start;
-    }
-
-    @media (max-width: 1020px) {
-      .sim-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .controls-strip {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-
-    .ctrl-box {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: 10px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-    }
-
-    .ctrl-box label {
-      color: var(--text-secondary);
-      font-weight: 600;
-    }
-
-    .ctrl-box input,
-    .ctrl-box select {
-      background: var(--bg-canvas);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 6px 10px;
-      font-family: inherit;
-      font-size: 0.85rem;
-      outline: none;
-    }
-
-    .ctrl-box input:focus,
-    .ctrl-box select:focus {
-      border-color: var(--accent-cyan);
+      gap: 16px;
     }
 
     .btn-primary {
@@ -621,19 +322,16 @@
       transition: transform 0.15s ease, filter 0.15s ease;
     }
 
-    .btn-primary:hover {
-      filter: brightness(1.06);
-      transform: translateY(-1px);
-    }
+    .btn-primary:hover { filter: brightness(1.06); transform: translateY(-1px); }
 
     .btn-secondary {
       background: var(--bg-surface-2);
       color: var(--text-primary);
       border: 1px solid var(--border);
       border-radius: var(--radius-sm);
-      padding: 10px 14px;
+      padding: 9px 14px;
       font-weight: 600;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -641,16 +339,216 @@
       transition: border-color 0.15s ease;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--border-strong);
+    .btn-secondary:hover { border-color: var(--border-strong); }
+
+    .diff-bar { display: flex; gap: 8px; flex-wrap: wrap; }
+    .diff-btn {
+      background: var(--bg-canvas);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: capitalize;
+    }
+    .diff-btn.active {
+      background: rgba(56, 189, 248, 0.18);
+      color: var(--accent-cyan);
+      border-color: var(--accent-cyan);
     }
 
-    .boxes-grid {
+    /* Guess the Foods Stage */
+    .gtf-arena {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
-      gap: 14px;
+      grid-template-columns: 320px 1fr;
+      gap: 24px;
+      align-items: center;
+      margin-top: 16px;
     }
 
+    @media (max-width: 820px) { .gtf-arena { grid-template-columns: 1fr; } }
+
+    .crop-viewport {
+      width: 260px;
+      height: 260px;
+      margin: 0 auto;
+      border-radius: 22px;
+      border: 2px solid var(--border-strong);
+      background: var(--bg-canvas);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .crop-viewport img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.25s ease, filter 0.25s ease;
+      display: block;
+    }
+
+    .guess-input-row {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .guess-input-row input {
+      flex: 1;
+      min-width: 210px;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 11px 14px;
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .guess-input-row input:focus { border-color: var(--accent-cyan); }
+
+    /* Daily Foods Puzzle Board */
+    .puzzle-board {
+      display: grid;
+      gap: 6px;
+      margin: 18px auto 0;
+      max-width: 440px;
+      background: var(--bg-canvas);
+      padding: 10px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+    }
+
+    .puzzle-tile {
+      aspect-ratio: 1 / 1;
+      border-radius: 10px;
+      border: 2px solid rgba(148, 163, 184, 0.25);
+      background-color: #0d1322;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+      user-select: none;
+    }
+
+    .puzzle-tile:hover { transform: scale(1.03); border-color: var(--accent-cyan); }
+
+    .puzzle-tile.selected {
+      border-color: var(--accent-amber);
+      box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.35);
+      transform: scale(1.04);
+      z-index: 2;
+    }
+
+    .puzzle-tile.correct-pos {
+      border-color: rgba(52, 211, 153, 0.65);
+    }
+
+    .puzzle-slot-num {
+      position: absolute;
+      top: 4px;
+      left: 5px;
+      font-size: 0.65rem;
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(9, 13, 22, 0.72);
+      color: var(--text-secondary);
+      padding: 1px 5px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+
+    .congrats-banner {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, rgba(52, 211, 153, 0.2), rgba(56, 189, 248, 0.18));
+      border: 1px solid rgba(52, 211, 153, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .congrats-banner.show { display: flex; animation: popReveal 0.3s ease; }
+
+    /* Roster Grid */
+    .filter-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 18px; }
+    .filter-chip {
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .filter-chip.active { background: rgba(56, 189, 248, 0.16); color: var(--accent-cyan); border-color: rgba(56, 189, 248, 0.45); }
+
+    .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(245px, 1fr)); gap: 16px; }
+    .game-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .game-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .game-icon-box {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .role-tag { font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 999px; border: 1px solid transparent; }
+    .role-owned { background: rgba(52, 211, 153, 0.14); color: var(--accent-emerald); border-color: rgba(52, 211, 153, 0.35); }
+    .role-co { background: rgba(129, 140, 248, 0.15); color: var(--accent-indigo); border-color: rgba(129, 140, 248, 0.35); }
+    .role-orig { background: rgba(251, 191, 36, 0.14); color: var(--accent-amber); border-color: rgba(251, 191, 36, 0.35); }
+    .role-helped { background: rgba(56, 189, 248, 0.13); color: var(--accent-cyan); border-color: rgba(56, 189, 248, 0.3); }
+
+    /* Simulator, Calculator & Value Guide */
+    .sim-layout { display: grid; grid-template-columns: 1fr 340px; gap: 24px; align-items: start; }
+    @media (max-width: 1020px) { .sim-layout { grid-template-columns: 1fr; } }
+
+    .controls-strip { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 20px; }
+    .ctrl-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+    .ctrl-box label { color: var(--text-secondary); font-weight: 600; }
+    .ctrl-box input, .ctrl-box select {
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .boxes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); gap: 14px; }
     .box-card {
       background: var(--bg-surface);
       border: 1px solid var(--border);
@@ -665,31 +563,10 @@
       justify-content: space-between;
       gap: 10px;
     }
-
-    .box-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--border-strong);
-      background: var(--bg-surface-2);
-    }
-
-    .box-card img {
-      width: 78px;
-      height: 78px;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45));
-    }
-
-    .box-card-name {
-      font-weight: 700;
-      font-size: 0.94rem;
-    }
-
-    .box-card-meta {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+    .box-card:hover { transform: translateY(-4px); border-color: var(--border-strong); background: var(--bg-surface-2); }
+    .box-card img { width: 78px; height: 78px; object-fit: contain; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45)); }
+    .box-card-name { font-weight: 700; font-size: 0.94rem; }
+    .box-card-meta { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
 
     .price-pill {
       font-family: 'JetBrains Mono', monospace;
@@ -702,24 +579,11 @@
       border: 1px solid rgba(251, 191, 36, 0.3);
     }
 
-    .count-pill {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      padding: 3px 7px;
-      border-radius: 6px;
-      background: rgba(255, 255, 255, 0.04);
-    }
+    .count-pill { font-size: 0.72rem; color: var(--text-muted); padding: 3px 7px; border-radius: 6px; background: rgba(255, 255, 255, 0.04); }
 
-    .side-panel {
-      position: sticky;
-      top: 84px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
+    .side-panel { position: sticky; top: 84px; display: flex; flex-direction: column; gap: 18px; }
     .pull-stage {
-      min-height: 220px;
+      min-height: 210px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -730,24 +594,11 @@
       border-radius: var(--radius-md);
       padding: 20px;
     }
-
-    .pull-stage img {
-      width: 112px;
-      height: 112px;
-      object-fit: contain;
-      margin-bottom: 12px;
-      animation: popReveal 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+    .pull-stage img { width: 112px; height: 112px; object-fit: contain; margin-bottom: 12px; animation: popReveal 0.3s ease; }
 
     @keyframes popReveal {
-      from {
-        transform: scale(0.72);
-        opacity: 0;
-      }
-      to {
-        transform: scale(1);
-        opacity: 1;
-      }
+      from { transform: scale(0.75); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
     }
 
     .rarity-badge {
@@ -758,7 +609,6 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      margin-top: 6px;
     }
 
     .r-uncommon { background: rgba(148, 163, 184, 0.18); color: #cbd5e1; }
@@ -770,15 +620,7 @@
     .r-mystical { background: rgba(129, 140, 248, 0.24); color: #a5b4fc; }
     .r-heavenly { background: linear-gradient(135deg, rgba(251, 191, 36, 0.28), rgba(56, 189, 248, 0.28)); color: #fef08a; }
 
-    .inv-list {
-      max-height: 240px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 12px;
-    }
-
+    .inv-list { max-height: 230px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
     .inv-item {
       display: flex;
       align-items: center;
@@ -790,46 +632,13 @@
       border-radius: var(--radius-sm);
       font-size: 0.83rem;
     }
+    .inv-left { display: flex; align-items: center; gap: 10px; }
+    .inv-left img { width: 30px; height: 30px; object-fit: contain; }
 
-    .inv-left {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .inv-left img {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-    }
-
-    /* Calculator */
-    .calc-top-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
-    }
-
-    .field-group {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 14px 16px;
-    }
-
-    .field-group label {
-      display: block;
-      font-size: 0.76rem;
-      color: var(--text-secondary);
-      font-weight: 600;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .field-group input,
-    .field-group select {
+    .calc-top-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .field-group { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; }
+    .field-group label { display: block; font-size: 0.76rem; color: var(--text-secondary); font-weight: 600; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .field-group input, .field-group select {
       width: 100%;
       background: var(--bg-canvas);
       color: var(--text-primary);
@@ -840,53 +649,13 @@
       outline: none;
     }
 
-    .field-group input:focus,
-    .field-group select:focus {
-      border-color: var(--accent-cyan);
-    }
+    .summary-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 22px; }
+    .stat-box { background: var(--bg-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 16px; }
+    .stat-box small { color: var(--text-muted); font-size: 0.76rem; display: block; margin-bottom: 4px; }
+    .stat-num { font-size: 1.35rem; font-weight: 700; color: var(--accent-cyan); }
 
-    .summary-stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-
-    .stat-box {
-      background: var(--bg-surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 16px;
-    }
-
-    .stat-box small {
-      color: var(--text-muted);
-      font-size: 0.76rem;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .stat-num {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--accent-cyan);
-    }
-
-    /* Data Table */
-    .table-wrap {
-      overflow-x: auto;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border);
-      background: var(--bg-surface);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 0.88rem;
-    }
-
+    .table-wrap { overflow-x: auto; border-radius: var(--radius-md); border: 1px solid var(--border); background: var(--bg-surface); }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.88rem; }
     th {
       background: var(--bg-surface-2);
       color: var(--text-secondary);
@@ -897,55 +666,15 @@
       border-bottom: 1px solid var(--border);
       white-space: nowrap;
     }
+    td { padding: 12px 16px; border-bottom: 1px solid rgba(148, 163, 184, 0.08); vertical-align: middle; }
+    tr:last-child td { border-bottom: none; }
 
-    td {
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
-      vertical-align: middle;
-    }
+    .food-cell { display: flex; align-items: center; gap: 12px; font-weight: 600; }
+    .food-cell img { width: 36px; height: 36px; object-fit: contain; border-radius: 8px; background: var(--bg-canvas); padding: 3px; }
 
-    tr:last-child td {
-      border-bottom: none;
-    }
+    .prob-bar-wrap { width: 140px; height: 8px; background: rgba(148, 163, 184, 0.14); border-radius: 999px; overflow: hidden; display: inline-block; vertical-align: middle; margin-right: 8px; }
+    .prob-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald)); border-radius: 999px; }
 
-    tr:hover td {
-      background: rgba(255, 255, 255, 0.02);
-    }
-
-    .food-cell {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 600;
-    }
-
-    .food-cell img {
-      width: 36px;
-      height: 36px;
-      object-fit: contain;
-      border-radius: 8px;
-      background: var(--bg-canvas);
-      padding: 3px;
-    }
-
-    .prob-bar-wrap {
-      width: 140px;
-      height: 8px;
-      background: rgba(148, 163, 184, 0.14);
-      border-radius: 999px;
-      overflow: hidden;
-      display: inline-block;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-
-    .prob-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
-      border-radius: 999px;
-    }
-
-    /* Toast */
     .toast {
       position: fixed;
       bottom: 24px;
@@ -964,11 +693,7 @@
       pointer-events: none;
       transition: all 0.22s ease;
     }
-
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
+    .toast.show { transform: translateY(0); opacity: 1; }
   </style>
 </head>
 <body>
@@ -1003,7 +728,7 @@
   </header>
 
   <main class="container">
-    <!-- 1. PROFILE / HOME (index.html) -->
+    <!-- 1. PROFILE (index.html) -->
     <section id="view-index" class="view-section active">
       <div class="profile-grid">
         <div class="card avatar-card">
@@ -1022,7 +747,7 @@
             <div class="handle-item">
               <div>
                 <span class="handle-label">Foodit Username</span>
-                <code id="handle-foodit">BlooketWarriorYT</code>
+                <code>BlooketWarriorYT</code>
               </div>
               <button class="copy-btn" onclick="copyText('BlooketWarriorYT', 'Foodit username copied!')">
                 <i class="fa-regular fa-copy"></i> Copy
@@ -1031,7 +756,7 @@
             <div class="handle-item">
               <div>
                 <span class="handle-label">Blooket Username</span>
-                <code id="handle-blooket">blooketWarrior2</code>
+                <code>blooketWarrior2</code>
               </div>
               <button class="copy-btn" onclick="copyText('blooketWarrior2', 'Blooket username copied!')">
                 <i class="fa-regular fa-copy"></i> Copy
@@ -1043,14 +768,14 @@
         <div class="card bio-card">
           <div class="section-kicker">About Me</div>
           <h2 class="section-heading" style="margin-bottom: 14px;">Creator Profile</h2>
-          <p id="bio-paragraph">
+          <p>
             Hi my name is Blooket Warrior and I am a Foodit Owner/Coder, Scratchlet Owner/Coder, etc... I am also a baseball player a RHP. I am <span class="age-chip" id="live-age-badge">16 years old</span>. My Foodit username is <strong>BlooketWarriorYT</strong> and my Blooket username is <strong>blooketWarrior2</strong>. I am a Christian/Believer of Jesus.
           </p>
 
           <div class="meta-note">
             <i class="fa-solid fa-calendar-check" style="color: var(--accent-cyan);"></i>
             <span>
-              Age auto-increments every year on <strong>February 28th</strong> (anchored at 16 on Feb 28, 2026 — current calculated age: <strong id="age-detail-text">16</strong>).
+              Age auto-increments every year on <strong>February 28th</strong> (current calculated age: <strong id="age-detail-text">16</strong>).
             </span>
           </div>
 
@@ -1058,12 +783,12 @@
             <button class="quick-tile" onclick="navigateTo('games.html')">
               <i class="fa-solid fa-gamepad"></i>
               <strong>Games</strong>
-              <span>8 titles across Owned, Co-Owned &amp; Helped</span>
+              <span>Guess the Foods, Daily Puzzle &amp; game list</span>
             </button>
             <button class="quick-tile" onclick="navigateTo('market-sim.html')">
               <i class="fa-solid fa-box-open"></i>
               <strong>Foodit Sim. Box</strong>
-              <span>Open boxes, test boosts &amp; track pulls</span>
+              <span>Open boxes &amp; track session pulls</span>
             </button>
             <button class="quick-tile" onclick="navigateTo('calculator.html')">
               <i class="fa-solid fa-calculator"></i>
@@ -1084,19 +809,141 @@
     <section id="view-games" class="view-section">
       <div class="section-header">
         <div>
-          <div class="section-kicker">Portfolio</div>
-          <h2 class="section-heading">Games I Made or Helped</h2>
-          <p class="section-desc">Projects owned, co-owned, originally started, or contributed to.</p>
+          <div class="section-kicker">Playable &amp; Creator Games</div>
+          <h2 class="section-heading">Games</h2>
+          <p class="section-desc">Play <strong>Guess the Foods</strong> and <strong>Daily Foods Puzzle</strong>, or browse the full game list.</p>
+        </div>
+      </div>
+
+      <!-- Featured Daily Mini-Games Shown in Games Section -->
+      <div class="featured-games-grid">
+        <div class="featured-game-card">
+          <div>
+            <span class="role-tag role-owned">DAILY • MAX 10 FOODS / DAY</span>
+            <h3 style="font-size: 1.25rem; margin-top: 10px;"><i class="fa-solid fa-magnifying-glass" style="color: var(--accent-cyan);"></i> Guess the Foods</h3>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 6px;">
+              Inspect a cropped/zoomed part of each Food image across <strong>Easy</strong>, <strong>Medium</strong>, <strong>Hard</strong>, or <strong>Challenge</strong> and type the exact Food name. Up to 10 Foods per day!
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="openMiniGame('guess')"><i class="fa-solid fa-play"></i> Play Guess the Foods</button>
+          </div>
+        </div>
+
+        <div class="featured-game-card">
+          <div>
+            <span class="role-tag role-co">DAILY • AUTO-CONGRATS</span>
+            <h3 style="font-size: 1.25rem; margin-top: 10px;"><i class="fa-solid fa-puzzle-piece" style="color: var(--accent-emerald);"></i> Daily Foods Puzzle</h3>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 6px;">
+              Connect scrambled Food image pieces into the complete Food picture across <strong>Easy</strong>, <strong>Medium</strong>, <strong>Hard</strong>, or <strong>Challenge</strong>. Automatically triggers a congratulations message when solved!
+            </p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button class="btn-primary" onclick="openMiniGame('puzzle')"><i class="fa-solid fa-play"></i> Play Daily Foods Puzzle</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini-Game A: Guess the Foods -->
+      <div class="card" id="minigame-guess" style="margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div>
+            <div class="section-kicker">(DAILY) • UP TO 10 FOODS PER DAY</div>
+            <h3 style="font-size: 1.3rem;">Guess the Foods</h3>
+          </div>
+          <div class="diff-bar" id="gtf-diff-bar">
+            <button class="diff-btn active" onclick="setGtfDifficulty('easy', this)">Easy</button>
+            <button class="diff-btn" onclick="setGtfDifficulty('medium', this)">Medium</button>
+            <button class="diff-btn" onclick="setGtfDifficulty('hard', this)">Hard</button>
+            <button class="diff-btn" onclick="setGtfDifficulty('challenge', this)">Challenge</button>
+          </div>
+        </div>
+
+        <div class="gtf-arena">
+          <div>
+            <div class="crop-viewport">
+              <img id="gtf-img" src="" alt="Food part to guess" />
+            </div>
+            <div style="text-align: center; margin-top: 10px; font-size: 0.82rem; color: var(--text-secondary);">
+              Daily Food <strong class="mono" id="gtf-progress">1 / 10</strong> • Score: <strong class="mono" style="color: var(--accent-emerald);" id="gtf-score">0</strong>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 6px;">
+              Difficulty: <strong id="gtf-diff-label" style="color: var(--accent-cyan);">Easy</strong>
+            </div>
+            <p id="gtf-hint" style="color: var(--text-secondary); font-size: 0.9rem;">
+              Type the exact name of this Food shown in the image part.
+            </p>
+
+            <div class="guess-input-row">
+              <input type="text" id="gtf-input" placeholder="Type the Food name..." onkeydown="if(event.key==='Enter') submitFoodGuess()" />
+              <button class="btn-primary" onclick="submitFoodGuess()"><i class="fa-solid fa-check"></i> Guess</button>
+              <button class="btn-secondary" onclick="skipOrNextFoodGuess()"><i class="fa-solid fa-forward"></i> Next</button>
+            </div>
+
+            <div id="gtf-feedback" style="margin-top: 12px; font-weight: 600; font-size: 0.9rem; min-height: 24px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mini-Game B: Daily Foods Puzzle -->
+      <div class="card" id="minigame-puzzle" style="margin-bottom: 30px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <div>
+            <div class="section-kicker">DAILY FOOD JIGSAW</div>
+            <h3 style="font-size: 1.3rem;">Daily Foods Puzzle</h3>
+          </div>
+          <div class="diff-bar" id="puz-diff-bar">
+            <button class="diff-btn active" onclick="setPuzzleDifficulty('easy', this)">Easy (2×2)</button>
+            <button class="diff-btn" onclick="setPuzzleDifficulty('medium', this)">Medium (3×3)</button>
+            <button class="diff-btn" onclick="setPuzzleDifficulty('hard', this)">Hard (4×4)</button>
+            <button class="diff-btn" onclick="setPuzzleDifficulty('challenge', this)">Challenge (5×5)</button>
+          </div>
+        </div>
+
+        <p style="color: var(--text-secondary); font-size: 0.88rem; margin-top: 8px;">
+          Click two pieces to swap and connect the Food image for <strong id="puz-food-title" style="color: var(--text-primary);">...</strong>.
+        </p>
+
+        <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 12px;">
+          <button class="btn-secondary" onclick="initDailyPuzzle()"><i class="fa-solid fa-shuffle"></i> Reshuffle</button>
+          <span style="font-size: 0.82rem; color: var(--text-secondary);">
+            Connected Pieces: <strong class="mono" style="color: var(--accent-cyan);" id="puz-matched-count">0 / 4</strong> • Moves: <strong class="mono" id="puz-moves">0</strong>
+          </span>
+        </div>
+
+        <div class="puzzle-board" id="puzzle-board"></div>
+
+        <div class="congrats-banner" id="puzzle-congrats">
+          <div>
+            <div style="font-size: 1.15rem; font-weight: 800; color: var(--accent-emerald);">
+              <i class="fa-solid fa-trophy"></i> Congratulations!
+            </div>
+            <p id="puzzle-congrats-msg" style="font-size: 0.88rem; color: var(--text-primary); margin-top: 2px;">
+              You connected all pieces of the Daily Food Puzzle!
+            </p>
+          </div>
+          <button class="btn-primary" onclick="initDailyPuzzle()"><i class="fa-solid fa-rotate-right"></i> Play Again</button>
+        </div>
+      </div>
+
+      <!-- Games List -->
+      <div class="section-header" style="margin-bottom: 14px;">
+        <div>
+          <div class="section-kicker">Full Game List</div>
+          <h3 style="font-size: 1.35rem;">Games I Made or Helped</h3>
         </div>
       </div>
 
       <div class="filter-bar" id="games-filter-bar">
-        <button class="filter-chip active" data-filter="all" onclick="filterGames('all', this)">All (8)</button>
-        <button class="filter-chip" data-filter="Owned" onclick="filterGames('Owned', this)">Owned</button>
-        <button class="filter-chip" data-filter="Helped/Co-Owned" onclick="filterGames('Helped/Co-Owned', this)">Helped/Co-Owned</button>
-        <button class="filter-chip" data-filter="Originally Owned" onclick="filterGames('Originally Owned', this)">Originally Owned</button>
-        <button class="filter-chip" data-filter="Originally Helped" onclick="filterGames('Originally Helped', this)">Originally Helped</button>
-        <button class="filter-chip" data-filter="Helped" onclick="filterGames('Helped', this)">Helped</button>
+        <button class="filter-chip active" onclick="filterGames('all', this)">All (8)</button>
+        <button class="filter-chip" onclick="filterGames('Owned', this)">Owned</button>
+        <button class="filter-chip" onclick="filterGames('Helped/Co-Owned', this)">Helped/Co-Owned</button>
+        <button class="filter-chip" onclick="filterGames('Originally Owned', this)">Originally Owned</button>
+        <button class="filter-chip" onclick="filterGames('Originally Helped', this)">Originally Helped</button>
+        <button class="filter-chip" onclick="filterGames('Helped', this)">Helped</button>
       </div>
 
       <div class="games-grid" id="games-grid"></div>
@@ -1108,7 +955,7 @@
         <div>
           <div class="section-kicker">Box Simulator</div>
           <h2 class="section-heading">Foodit Sim. Box</h2>
-          <p class="section-desc">Click any box to simulate openings using the market drop table and boost rules.</p>
+          <p class="section-desc">Open Foodit boxes with real drop weights and test 1x, 1.5x, or 2x boosts.</p>
         </div>
       </div>
 
@@ -1120,7 +967,7 @@
         <button class="btn-secondary" onclick="addSimTokens(500)">+500 Tokens</button>
         <div class="ctrl-box">
           <label for="sim-boost-select">Boost</label>
-          <select id="sim-boost-select" onchange="updateSimState()">
+          <select id="sim-boost-select" onchange="renderSimBoxes()">
             <option value="1">1x Normal</option>
             <option value="1.5">1.5x Boost</option>
             <option value="2">2x Boost</option>
@@ -1140,7 +987,7 @@
             <div class="section-kicker" style="margin-bottom: 8px;">Latest Pull</div>
             <div class="pull-stage" id="sim-pull-stage">
               <i class="fa-solid fa-sparkles" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 10px;"></i>
-              <p style="color: var(--text-secondary); font-size: 0.9rem;">Select a box on the left to open Foods.</p>
+              <p style="color: var(--text-secondary); font-size: 0.9rem;">Click a box to open Foods.</p>
             </div>
           </div>
 
@@ -1166,7 +1013,7 @@
         <div>
           <div class="section-kicker">Odds Engine</div>
           <h2 class="section-heading">Foodit Calculator to Chances</h2>
-          <p class="section-desc">Enter your token amount to calculate boxes affordable and exact pull chances up to 100%.</p>
+          <p class="section-desc">Type your token amount to see boxes affordable and exact pull chances up to 100%.</p>
         </div>
       </div>
 
@@ -1225,14 +1072,14 @@
         <div>
           <div class="section-kicker">Trading Reference</div>
           <h2 class="section-heading">Foodit Value Guide</h2>
-          <p class="section-desc">Estimated token/trade values for every Food based on rarity, drop chance, and box cost.</p>
+          <p class="section-desc">Estimated token values for every Food based on rarity, drop rate, and box tier.</p>
         </div>
       </div>
 
       <div class="calc-top-grid">
         <div class="field-group">
           <label for="val-search">Search Food or Box</label>
-          <input type="text" id="val-search" placeholder="e.g. Blooket Warrior, Milk, Space..." oninput="renderValueGuide()" />
+          <input type="text" id="val-search" placeholder="Search Food or Box..." oninput="renderValueGuide()" />
         </div>
         <div class="field-group">
           <label for="val-rarity">Filter by Rarity</label>
@@ -1281,21 +1128,13 @@
   <script>
     /* =========================================================================
        AUTO-UPDATING AGE (Increments every year on February 28th)
-       Base anchor: 16 years old on February 28, 2026.
        ========================================================================= */
     function calculateCurrentAge(now = new Date()) {
       const baseAge = 16;
       const baseYear = 2026;
-      const year = now.getFullYear();
-      const month = now.getMonth(); // 0-indexed: 1 = February
-      const day = now.getDate();
-
-      // Birthday anniversary in a given year occurs on Feb 28
-      let anniversariesPassed = year - baseYear;
-      const beforeFeb28ThisYear = (month === 0) || (month === 1 && day < 28);
-      if (beforeFeb28ThisYear) {
-        anniversariesPassed -= 1;
-      }
+      let anniversariesPassed = now.getFullYear() - baseYear;
+      const beforeFeb28ThisYear = (now.getMonth() === 0) || (now.getMonth() === 1 && now.getDate() < 28);
+      if (beforeFeb28ThisYear) anniversariesPassed -= 1;
       return Math.max(0, baseAge + anniversariesPassed);
     }
 
@@ -1308,17 +1147,17 @@
     }
 
     /* =========================================================================
-       GAMES ROSTER
+       GAMES LIST
        ========================================================================= */
     const GAMES_LIST = [
-      { name: "Foodit", role: "Owned", icon: "fa-burger", desc: "Owned platform and game experience featuring boxes, foods, and market systems." },
-      { name: "Scratchlet", role: "Helped/Co-Owned", icon: "fa-code-branch", desc: "Co-owned and helped build game features and community systems." },
-      { name: "Ploopit", role: "Originally Helped", icon: "fa-shapes", desc: "Originally helped with early development and setup." },
-      { name: "Warriet", role: "Originally Owned", icon: "fa-shield-halved", desc: "Originally owned project and creator space." },
+      { name: "Foodit", role: "Owned", icon: "fa-burger", desc: "Owned Foodit platform and game experience." },
+      { name: "Scratchlet", role: "Helped/Co-Owned", icon: "fa-code-branch", desc: "Co-owned and helped build game systems." },
+      { name: "Ploopit", role: "Originally Helped", icon: "fa-shapes", desc: "Originally helped set up early features." },
+      { name: "Warriet", role: "Originally Owned", icon: "fa-shield-halved", desc: "Originally owned project and creator hub." },
       { name: "Earthlet", role: "Helped", icon: "fa-earth-americas", desc: "Helped with development and content." },
-      { name: "Mangolet", role: "Helped", icon: "fa-lemon", desc: "Helped contribute to game features and assets." },
+      { name: "Mangolet", role: "Helped", icon: "fa-lemon", desc: "Helped build features and assets." },
       { name: "Oceanlet", role: "Helped", icon: "fa-water", desc: "Helped with ocean-themed game elements." },
-      { name: "Picklet", role: "Helped", icon: "fa-seedling", desc: "Helped build and support game mechanics." }
+      { name: "Picklet", role: "Helped", icon: "fa-seedling", desc: "Helped develop and support game features." }
     ];
 
     function roleBadgeClass(role) {
@@ -1339,8 +1178,8 @@
               <div class="game-icon-box"><i class="fa-solid ${g.icon}"></i></div>
               <span class="role-tag ${roleBadgeClass(g.role)}">${g.role}</span>
             </div>
-            <h3 style="margin-top: 14px;">${g.name}</h3>
-            <p style="margin-top: 6px;">${g.desc}</p>
+            <h3 style="font-size: 1.08rem; margin-top: 12px;">${g.name}</h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 6px;">${g.desc}</p>
           </div>
         </article>
       `).join("");
@@ -1353,14 +1192,11 @@
     }
 
     /* =========================================================================
-       FOODIT MARKET BOXES & DROP TABLES (From market (1).txt)
+       MARKET BOXES & FOODS
        ========================================================================= */
     const MARKET_BOXES = [
       {
-        id: "milk",
-        name: "Milk Box",
-        cost: 30,
-        img: "https://i.postimg.cc/gj2mQYfr/milkbox.png",
+        id: "milk", name: "Milk Box", cost: 30, img: "https://i.postimg.cc/gj2mQYfr/milkbox.png",
         foods: [
           { name: "Banana Milk", img: "https://i.postimg.cc/0rk43L7m/banana-Milk.png", rarity: "uncommon", chance: 30 },
           { name: "Strawberry Milk", img: "https://i.postimg.cc/YjrPVJQ6/strawberry-Milk.png", rarity: "uncommon", chance: 25 },
@@ -1377,10 +1213,7 @@
         ]
       },
       {
-        id: "space",
-        name: "Space Box",
-        cost: 30,
-        img: "https://i.postimg.cc/28XhHyPn/spacebox.png",
+        id: "space", name: "Space Box", cost: 30, img: "https://i.postimg.cc/28XhHyPn/spacebox.png",
         foods: [
           { name: "Moon", img: "https://i.postimg.cc/SQWG21p9/moon.png", rarity: "uncommon", chance: 30 },
           { name: "Asteroid", img: "https://i.postimg.cc/bvtnXdyT/asteroid.png", rarity: "uncommon", chance: 25 },
@@ -1400,10 +1233,7 @@
         ]
       },
       {
-        id: "school",
-        name: "School Box",
-        cost: 30,
-        img: "https://i.postimg.cc/nrqVqRbP/schoolbox.png",
+        id: "school", name: "School Box", cost: 30, img: "https://i.postimg.cc/nrqVqRbP/schoolbox.png",
         foods: [
           { name: "Pencil", img: "https://i.postimg.cc/9rcNCPM2/pencil.png", rarity: "uncommon", chance: 30 },
           { name: "Pencil Pouch", img: "https://i.postimg.cc/wtnGpSt4/pencil-Pouch.png", rarity: "uncommon", chance: 25 },
@@ -1418,10 +1248,7 @@
         ]
       },
       {
-        id: "donut",
-        name: "Donut Box",
-        cost: 30,
-        img: "https://i.postimg.cc/zfBpP4fj/donutbox.png",
+        id: "donut", name: "Donut Box", cost: 30, img: "https://i.postimg.cc/zfBpP4fj/donutbox.png",
         foods: [
           { name: "Glaze Donut", img: "https://i.postimg.cc/W4GVHFd7/Glaze-Donut.webp", rarity: "uncommon", chance: 30 },
           { name: "Strawberry Glazed Donut", img: "https://i.postimg.cc/B6Sr7h9q/Strawberry-Glazed-Donut.webp", rarity: "uncommon", chance: 25 },
@@ -1437,10 +1264,7 @@
         ]
       },
       {
-        id: "og",
-        name: "OG Box",
-        cost: 30,
-        img: "https://i.postimg.cc/VNGnr6m3/ogbox.png",
+        id: "og", name: "OG Box", cost: 30, img: "https://i.postimg.cc/VNGnr6m3/ogbox.png",
         foods: [
           { name: "Bagel Penguin", img: "https://i.postimg.cc/Fk7KBcZh/bagel-Penguin.png", rarity: "uncommon", chance: 30 },
           { name: "Chip", img: "https://i.postimg.cc/8FNzVxHK/chip.png", rarity: "uncommon", chance: 30 },
@@ -1465,10 +1289,7 @@
         ]
       },
       {
-        id: "frog",
-        name: "Frog Box",
-        cost: 30,
-        img: "https://i.postimg.cc/6378SfnK/frogbox.png",
+        id: "frog", name: "Frog Box", cost: 30, img: "https://i.postimg.cc/6378SfnK/frogbox.png",
         foods: [
           { name: "Blue Frog", img: "https://i.postimg.cc/kD0WT6th/bluefrog.png", rarity: "uncommon", chance: 30 },
           { name: "Earth Frog", img: "https://i.postimg.cc/grC3gX6t/earthfrog.png", rarity: "uncommon", chance: 30 },
@@ -1480,10 +1301,7 @@
         ]
       },
       {
-        id: "western",
-        name: "Western Box",
-        cost: 30,
-        img: "https://i.postimg.cc/GpxKtr5L/westernbox.png",
+        id: "western", name: "Western Box", cost: 30, img: "https://i.postimg.cc/GpxKtr5L/westernbox.png",
         foods: [
           { name: "Armadillo", img: "https://i.postimg.cc/XXRRjF7m/armadillo.webp", rarity: "uncommon", chance: 25.5 },
           { name: "Rattle Snake", img: "https://i.postimg.cc/ThzzdmYB/rattlesnake.webp", rarity: "uncommon", chance: 25.5 },
@@ -1501,10 +1319,7 @@
         ]
       },
       {
-        id: "mexican",
-        name: "Mexican Box",
-        cost: 30,
-        img: "https://i.postimg.cc/W34Wg2kC/mexicanbox.png",
+        id: "mexican", name: "Mexican Box", cost: 30, img: "https://i.postimg.cc/W34Wg2kC/mexicanbox.png",
         foods: [
           { name: "Queso", img: "https://i.postimg.cc/qRdkm3j1/queso.png", rarity: "uncommon", chance: 20 },
           { name: "Burrito", img: "https://i.postimg.cc/CKSPmMbf/burrito.png", rarity: "uncommon", chance: 20 },
@@ -1519,10 +1334,7 @@
         ]
       },
       {
-        id: "color",
-        name: "Color Box",
-        cost: 30,
-        img: "https://i.postimg.cc/C5CKNpCs/colorbox.png",
+        id: "color", name: "Color Box", cost: 30, img: "https://i.postimg.cc/C5CKNpCs/colorbox.png",
         foods: [
           { name: "White", img: "https://i.postimg.cc/bwTzmtFs/blooktemplate.png", rarity: "uncommon", chance: 25 },
           { name: "Red", img: "https://i.postimg.cc/q6VSKZBh/redblooktemplate.png", rarity: "uncommon", chance: 25 },
@@ -1549,10 +1361,7 @@
         ]
       },
       {
-        id: "sports",
-        name: "Sports Box",
-        cost: 30,
-        img: "https://i.postimg.cc/PJYGjrbF/sportsbox.png",
+        id: "sports", name: "Sports Box", cost: 30, img: "https://i.postimg.cc/PJYGjrbF/sportsbox.png",
         foods: [
           { name: "Basketball", img: "https://i.postimg.cc/nV4H4QHN/Basketball.png", rarity: "uncommon", chance: 25 },
           { name: "Football", img: "https://i.postimg.cc/RC7M7nMs/Football.png", rarity: "uncommon", chance: 25 },
@@ -1570,15 +1379,22 @@
           { name: "Beach Ball", img: "https://i.postimg.cc/ZY8T8yT1/Beach-Ball.png", rarity: "legendary", chance: 0.5 },
           { name: "Baseball", img: "https://i.postimg.cc/nV4H4QFp/Baseball.png", rarity: "chroma", chance: 0.05 },
           { name: "Softball", img: "https://i.postimg.cc/SQ6y6zSh/Softball.png", rarity: "chroma", chance: 0.03 },
+          { name: "Iced Puck", img: "https://i.postimg.cc/Z5mFsTvL/iced-puck.webp", rarity: "unique", chance: 0.02 },
+          { name: "Basketball Player", img: "https://i.postimg.cc/t4btvXnM/basketball-player.webp", rarity: "unique", chance: 0.02 },
+          { name: "Golden Football", img: "https://i.postimg.cc/65nfh7qT/golden-football.webp", rarity: "unique", chance: 0.02 },
+          { name: "Emerald Soccer Ball", img: "https://i.postimg.cc/y8KXpV3r/emerald-soccer-ball.png", rarity: "unique", chance: 0.02 },
+          { name: "Baseball Field", img: "https://i.postimg.cc/2SYF9zLg/baseball-field.png", rarity: "unique", chance: 0.02 },
           { name: "Glowing Tennis Ball", img: "https://i.postimg.cc/hj1CpX9M/Glowing-Tennis-Ball.gif", rarity: "mystical", chance: 0.005 },
-          { name: "Diamond Bowling Pins", img: "https://i.postimg.cc/DZPCBSqg/Diamond-Bowling-Pins.gif", rarity: "mystical", chance: 0.003 }
+          { name: "Diamond Bowling Pins", img: "https://i.postimg.cc/DZPCBSqg/Diamond-Bowling-Pins.gif", rarity: "mystical", chance: 0.003 },
+          { name: "Puck in Goal", img: "https://i.postimg.cc/YSzWq50j/puck-in-goal.gif", rarity: "heavenly", chance: 0.001 },
+          { name: "Dribbling Basketball", img: "https://i.postimg.cc/HnzCKLvN/dribbling-basketball.gif", rarity: "heavenly", chance: 0.001 },
+          { name: "Northern Lights Football", img: "https://i.postimg.cc/YSyhmHcp/northern-lights-football.gif", rarity: "heavenly", chance: 0.001 },
+          { name: "Diamond Baseball", img: "https://i.postimg.cc/TwTPZsDb/Diamond-Baseball.gif", rarity: "heavenly", chance: 0.001 },
+          { name: "Glowing Soccer Ball", img: "https://i.postimg.cc/Hxs9THwM/glowing-soccer-ball.gif", rarity: "heavenly", chance: 0.001 }
         ]
       },
       {
-        id: "spooky",
-        name: "Spooky Box",
-        cost: 50,
-        img: "https://i.postimg.cc/28xKcsYH/spookybox.png",
+        id: "spooky", name: "Spooky Box", cost: 50, img: "https://i.postimg.cc/28xKcsYH/spookybox.png",
         foods: [
           { name: "Devil Milk", img: "https://i.postimg.cc/tYCRHrfD/devil-Milk.png", rarity: "uncommon", chance: 30 },
           { name: "Mummy Monster", img: "https://i.postimg.cc/nM1Vg8dC/Mummy-Monster-3.png", rarity: "uncommon", chance: 25 },
@@ -1597,10 +1413,7 @@
         ]
       },
       {
-        id: "thanksgiving",
-        name: "Thanksgiving Box",
-        cost: 50,
-        img: "https://i.postimg.cc/wB1Cy2Qz/thanksgivingpack.png",
+        id: "thanksgiving", name: "Thanksgiving Box", cost: 50, img: "https://i.postimg.cc/wB1Cy2Qz/thanksgivingpack.png",
         foods: [
           { name: "Leaf Pile", img: "https://i.postimg.cc/hzJhG03f/autumncat2.webp", rarity: "uncommon", chance: 30 },
           { name: "Cornucopia", img: "https://i.postimg.cc/svPx1xK9/costume2-1.webp", rarity: "uncommon", chance: 30 },
@@ -1614,10 +1427,7 @@
         ]
       },
       {
-        id: "blizzard",
-        name: "Blizzard Box",
-        cost: 50,
-        img: "https://i.postimg.cc/NFBC4kTZ/blizzardbox.png",
+        id: "blizzard", name: "Blizzard Box", cost: 50, img: "https://i.postimg.cc/NFBC4kTZ/blizzardbox.png",
         foods: [
           { name: "Cool Santa", img: "https://i.postimg.cc/hhHxx4Y3/cool-Santa.png", rarity: "uncommon", chance: 30 },
           { name: "Holiday Cat", img: "https://i.postimg.cc/rzzCxPwz/Holiday-Cat-1.png", rarity: "uncommon", chance: 25 },
@@ -1627,15 +1437,18 @@
           { name: "Blooket Christmas Snow Globe", img: "https://i.postimg.cc/FfZgVtSk/snowglobe-svg-1.png", rarity: "epic", chance: 4 },
           { name: "Evil Snowman", img: "https://i.postimg.cc/cgz3FdLC/Evil-Snowman-1.png", rarity: "epic", chance: 4 },
           { name: "Santa Bot", img: "https://i.postimg.cc/yg8hffhQ/santaBot.png", rarity: "legendary", chance: 3 },
+          { name: "Frozen Crab", img: "https://i.postimg.cc/1nX608Pb/frozen-Crab.png", rarity: "chroma", chance: 0.05 },
+          { name: "Frozen Deer", img: "https://i.postimg.cc/Nypmr6h1/frozen-Deer.png", rarity: "chroma", chance: 0.05 },
+          { name: "Frozen Monster", img: "https://i.postimg.cc/v1Q5BPKY/frozen-Monster.png", rarity: "chroma", chance: 0.05 },
+          { name: "Frozen Owl", img: "https://i.postimg.cc/K1hPXcrg/frozen-Owl.png", rarity: "chroma", chance: 0.05 },
+          { name: "Frozen Shark", img: "https://i.postimg.cc/D8XrY4sT/frozen-Shark.png", rarity: "chroma", chance: 0.05 },
           { name: "Island Snowglobe", img: "https://i.postimg.cc/m2QjDLzQ/islandsnowglobe.png", rarity: "unique", chance: 0.03 },
+          { name: "Golden Wreath", img: "https://i.postimg.cc/tsdh902v/golden-Wreath.png", rarity: "unique", chance: 0.03 },
           { name: "Turtle Clause", img: "https://i.postimg.cc/brqgyzGs/Turtle-Claus.gif", rarity: "mystical", chance: 0.009 }
         ]
       },
       {
-        id: "lovely",
-        name: "Love Box",
-        cost: 500,
-        img: "https://i.postimg.cc/y6LytKzx/lovelybox.png",
+        id: "lovely", name: "Love Box", cost: 500, img: "https://i.postimg.cc/y6LytKzx/lovelybox.png",
         foods: [
           { name: "Lovely Cat", img: "https://i.postimg.cc/YSHb6qQB/Lovely-Cat.png", rarity: "chroma", chance: 10 },
           { name: "Lovely Bot", img: "https://i.postimg.cc/wjvNR1W2/lovelybot.png", rarity: "chroma", chance: 10 },
@@ -1650,73 +1463,309 @@
         ]
       },
       {
-        id: "lucky",
-        name: "Lucky Box",
-        cost: 500,
-        img: "https://i.postimg.cc/BnTLW51Y/luckybox.png",
-        foods: [
-          { name: "Lucky Clover", img: "https://i.postimg.cc/25XCg3Tx/image-(14).png", rarity: "chroma", chance: 100 }
-        ]
+        id: "lucky", name: "Lucky Box", cost: 500, img: "https://i.postimg.cc/BnTLW51Y/luckybox.png",
+        foods: [{ name: "Lucky Clover", img: "https://i.postimg.cc/25XCg3Tx/image-(14).png", rarity: "chroma", chance: 100 }]
       },
       {
-        id: "spring",
-        name: "Spring Box",
-        cost: 500,
-        img: "https://i.postimg.cc/BnTLW51Y/luckybox.png",
-        foods: [
-          { name: "Spring Cat", img: "https://i.postimg.cc/rF6w80TP/Spring-Cat.png", rarity: "chroma", chance: 100 }
-        ]
+        id: "spring", name: "Spring Box", cost: 500, img: "https://i.postimg.cc/BnTLW51Y/luckybox.png",
+        foods: [{ name: "Spring Cat", img: "https://i.postimg.cc/rF6w80TP/Spring-Cat.png", rarity: "chroma", chance: 100 }]
       },
       {
-        id: "summer",
-        name: "Summer Box",
-        cost: 500,
-        img: "https://i.postimg.cc/BnTLW51Y/luckybox.png",
-        foods: [
-          { name: "Summer Cat", img: "https://i.postimg.cc/rF6w80TP/Spring-Cat.png", rarity: "chroma", chance: 100 }
-        ]
+        id: "summer", name: "Summer Box", cost: 500, img: "https://i.postimg.cc/BnTLW51Y/luckybox.png",
+        foods: [{ name: "Summer Cat", img: "https://i.postimg.cc/rF6w80TP/Spring-Cat.png", rarity: "chroma", chance: 100 }]
       },
       {
-        id: "ocean",
-        name: "Ocean Box",
-        cost: 500,
-        img: "https://i.postimg.cc/Zq1KxTSk/oceanlet.png",
-        foods: [
-          { name: "Oceanlet", img: "https://i.postimg.cc/Zq1KxTSk/oceanlet.png", rarity: "unique", chance: 100 }
-        ]
+        id: "ocean", name: "Ocean Box", cost: 500, img: "https://i.postimg.cc/Zq1KxTSk/oceanlet.png",
+        foods: [{ name: "Oceanlet", img: "https://i.postimg.cc/Zq1KxTSk/oceanlet.png", rarity: "unique", chance: 100 }]
       }
     ];
 
+    const ALL_FOODS = MARKET_BOXES.flatMap(b => b.foods.map(f => ({ ...f, boxName: b.name })));
+
     /* =========================================================================
-       PROBABILITY MATH (Matches market (1).txt boost weighting)
-       - Non-uncommon items get multiplied by `boost` (1, 1.5, or 2).
-       - Single-box probability p = boostedWeight / sumOfBoostedWeights.
-       - Over N boxes, cumulative chance = min(100, (1 - (1 - p)^N) * 100).
+       (DAILY) GUESS THE FOODS (Max 10 foods/day, Easy/Medium/Hard/Challenge)
+       ========================================================================= */
+    const MAX_DAILY_GUESS_FOODS = 10;
+    const GTF_DIFF_SETTINGS = {
+      easy:      { scale: 1.55, tx: 8,  ty: 8,  blur: 0 },
+      medium:    { scale: 2.15, tx: 16, ty: 14, blur: 0 },
+      hard:      { scale: 2.85, tx: 22, ty: 20, blur: 0.4 },
+      challenge: { scale: 3.6,  tx: 28, ty: 26, blur: 1.2 }
+    };
+
+    let gtfDiff = "easy";
+    let gtfDailyDeck = [];
+    let gtfIndex = 0;
+    let gtfScore = 0;
+    let gtfAnsweredCurrent = false;
+
+    function getTodayDateKey() {
+      const d = new Date();
+      return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    }
+
+    function seededRandom(seedStr) {
+      let h = 2166136261 >>> 0;
+      for (let i = 0; i < seedStr.length; i++) {
+        h ^= seedStr.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return function () {
+        h += 0x6D2B79F5;
+        let t = Math.imul(h ^ (h >>> 15), 1 | h);
+        t ^= t + Math.imul(t ^ (t >>> 7), 61 | t);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+
+    function buildDailyGuessDeck() {
+      const key = getTodayDateKey();
+      const rng = seededRandom("guess-foods-" + key);
+      const copy = [...ALL_FOODS];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(rng() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      gtfDailyDeck = copy.slice(0, MAX_DAILY_GUESS_FOODS).map((food, idx) => {
+        const signX = rng() > 0.5 ? 1 : -1;
+        const signY = rng() > 0.5 ? 1 : -1;
+        return {
+          ...food,
+          rx: signX * (0.35 + rng() * 0.65),
+          ry: signY * (0.35 + rng() * 0.65),
+          answered: false
+        };
+      });
+      gtfIndex = 0;
+      gtfScore = 0;
+    }
+
+    function setGtfDifficulty(diff, btnEl) {
+      gtfDiff = diff;
+      document.querySelectorAll("#gtf-diff-bar .diff-btn").forEach(b => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+      document.getElementById("gtf-diff-label").textContent = diff.charAt(0).toUpperCase() + diff.slice(1);
+      renderCurrentGuessFood();
+    }
+
+    function renderCurrentGuessFood() {
+      if (!gtfDailyDeck.length) buildDailyGuessDeck();
+      const food = gtfDailyDeck[gtfIndex];
+      const imgEl = document.getElementById("gtf-img");
+      const progEl = document.getElementById("gtf-progress");
+      const scoreEl = document.getElementById("gtf-score");
+      const fbEl = document.getElementById("gtf-feedback");
+      const inpEl = document.getElementById("gtf-input");
+
+      progEl.textContent = `${gtfIndex + 1} / ${MAX_DAILY_GUESS_FOODS}`;
+      scoreEl.textContent = gtfScore;
+      gtfAnsweredCurrent = Boolean(food.answered);
+
+      if (imgEl && food) {
+        imgEl.src = food.img;
+        if (gtfAnsweredCurrent) {
+          imgEl.style.transform = "scale(1) translate(0px, 0px)";
+          imgEl.style.filter = "none";
+        } else {
+          const s = GTF_DIFF_SETTINGS[gtfDiff] || GTF_DIFF_SETTINGS.easy;
+          const xPx = Math.round(food.rx * s.tx);
+          const yPx = Math.round(food.ry * s.ty);
+          imgEl.style.transform = `scale(${s.scale}) translate(${xPx}px, ${yPx}px)`;
+          imgEl.style.filter = s.blur > 0 ? `blur(${s.blur}px)` : "none";
+        }
+      }
+
+      if (inpEl) {
+        inpEl.value = "";
+        inpEl.focus();
+      }
+      if (fbEl) fbEl.textContent = "";
+    }
+
+    function submitFoodGuess() {
+      if (!gtfDailyDeck.length) return;
+      const food = gtfDailyDeck[gtfIndex];
+      const inp = document.getElementById("gtf-input");
+      const fb = document.getElementById("gtf-feedback");
+      const guess = (inp?.value || "").trim().toLowerCase();
+
+      if (!guess) {
+        fb.style.color = "var(--accent-amber)";
+        fb.textContent = "Type a Food name first!";
+        return;
+      }
+
+      const target = food.name.toLowerCase();
+      if (guess === target) {
+        if (!food.answered) {
+          food.answered = true;
+          gtfScore += 1;
+        }
+        gtfAnsweredCurrent = true;
+        const imgEl = document.getElementById("gtf-img");
+        imgEl.style.transform = "scale(1) translate(0px, 0px)";
+        imgEl.style.filter = "none";
+        document.getElementById("gtf-score").textContent = gtfScore;
+        fb.style.color = "var(--accent-emerald)";
+        fb.textContent = `Correct! That Food is ${food.name} (${food.boxName}).`;
+      } else {
+        fb.style.color = "var(--accent-rose)";
+        fb.textContent = "Not quite — try again or click Next.";
+      }
+    }
+
+    function skipOrNextFoodGuess() {
+      if (gtfIndex < MAX_DAILY_GUESS_FOODS - 1) {
+        gtfIndex += 1;
+        renderCurrentGuessFood();
+      } else {
+        const fb = document.getElementById("gtf-feedback");
+        fb.style.color = "var(--accent-cyan)";
+        fb.textContent = `Daily limit reached (10/10 Foods)! Final Daily Score: ${gtfScore}/10.`;
+      }
+    }
+
+    /* =========================================================================
+       DAILY FOODS PUZZLE (Easy, Medium, Hard, Challenge + Auto Congratulations)
+       ========================================================================= */
+    const PUZZLE_GRID_SIZE = {
+      easy: 2,
+      medium: 3,
+      hard: 4,
+      challenge: 5
+    };
+
+    let puzDiff = "easy";
+    let puzOrder = []; // current piece index at each board slot
+    let puzSelectedSlot = null;
+    let puzMoves = 0;
+    let puzSolved = false;
+    let puzFood = null;
+
+    function pickDailyPuzzleFood() {
+      const key = getTodayDateKey();
+      const rng = seededRandom("daily-puzzle-" + key);
+      return ALL_FOODS[Math.floor(rng() * ALL_FOODS.length)];
+    }
+
+    function setPuzzleDifficulty(diff, btnEl) {
+      puzDiff = diff;
+      document.querySelectorAll("#puz-diff-bar .diff-btn").forEach(b => b.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+      initDailyPuzzle();
+    }
+
+    function initDailyPuzzle() {
+      const size = PUZZLE_GRID_SIZE[puzDiff] || 2;
+      const total = size * size;
+      puzFood = puzFood || pickDailyPuzzleFood();
+      document.getElementById("puz-food-title").textContent = `${puzFood.name} (${puzFood.boxName})`;
+
+      puzOrder = Array.from({ length: total }, (_, i) => i);
+      // Shuffle until not already solved
+      do {
+        for (let i = puzOrder.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [puzOrder[i], puzOrder[j]] = [puzOrder[j], puzOrder[i]];
+        }
+      } while (puzOrder.every((val, idx) => val === idx));
+
+      puzSelectedSlot = null;
+      puzMoves = 0;
+      puzSolved = false;
+
+      document.getElementById("puzzle-congrats").classList.remove("show");
+      renderPuzzleBoard();
+    }
+
+    function renderPuzzleBoard() {
+      const size = PUZZLE_GRID_SIZE[puzDiff] || 2;
+      const total = size * size;
+      const board = document.getElementById("puzzle-board");
+      board.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+      let matchedCount = 0;
+      board.innerHTML = puzOrder.map((pieceIdx, slotIdx) => {
+        const isCorrect = pieceIdx === slotIdx;
+        if (isCorrect) matchedCount += 1;
+
+        const row = Math.floor(pieceIdx / size);
+        const col = pieceIdx % size;
+        const posX = size === 1 ? 0 : (col / (size - 1)) * 100;
+        const posY = size === 1 ? 0 : (row / (size - 1)) * 100;
+        const bgSize = `${size * 100}% ${size * 100}%`;
+        const selectedClass = puzSelectedSlot === slotIdx ? "selected" : "";
+        const correctClass = isCorrect ? "correct-pos" : "";
+
+        return `
+          <div
+            class="puzzle-tile ${selectedClass} ${correctClass}"
+            style="background-image: url('${puzFood.img}'); background-size: ${bgSize}; background-position: ${posX}% ${posY}%;"
+            onclick="handlePuzzleTileClick(${slotIdx})"
+            title="Piece ${pieceIdx + 1}"
+          >
+            <span class="puzzle-slot-num">${slotIdx + 1}</span>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("puz-matched-count").textContent = `${matchedCount} / ${total}`;
+      document.getElementById("puz-moves").textContent = puzMoves;
+
+      if (matchedCount === total && !puzSolved) {
+        puzSolved = true;
+        const banner = document.getElementById("puzzle-congrats");
+        const msg = document.getElementById("puzzle-congrats-msg");
+        msg.textContent = `You completed the ${puzDiff.toUpperCase()} puzzle for ${puzFood.name} in ${puzMoves} moves!`;
+        banner.classList.add("show");
+        showToast("Congratulations! Puzzle completed!");
+      }
+    }
+
+    function handlePuzzleTileClick(slotIdx) {
+      if (puzSolved) return;
+      if (puzSelectedSlot === null) {
+        puzSelectedSlot = slotIdx;
+        renderPuzzleBoard();
+        return;
+      }
+      if (puzSelectedSlot === slotIdx) {
+        puzSelectedSlot = null;
+        renderPuzzleBoard();
+        return;
+      }
+      const temp = puzOrder[puzSelectedSlot];
+      puzOrder[puzSelectedSlot] = puzOrder[slotIdx];
+      puzOrder[slotIdx] = temp;
+      puzSelectedSlot = null;
+      puzMoves += 1;
+      renderPuzzleBoard();
+    }
+
+    function openMiniGame(which) {
+      const targetId = which === "puzzle" ? "minigame-puzzle" : "minigame-guess";
+      document.getElementById(targetId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    /* =========================================================================
+       SIMULATOR, CALCULATOR & VALUE GUIDE
        ========================================================================= */
     function getBoostedWeights(box, boost = 1) {
       const b = Number(boost) || 1;
       if (box.foods.length === 1 && box.foods[0].chance >= 100) {
         return { weights: [1], total: 1, singleProbs: [1] };
       }
-      const weights = box.foods.map(f => {
-        const mult = f.rarity !== "uncommon" ? b : 1;
-        return Number(f.chance || 0) * mult;
-      });
+      const weights = box.foods.map(f => Number(f.chance || 0) * (f.rarity !== "uncommon" ? b : 1));
       const total = weights.reduce((a, c) => a + c, 0) || 1;
-      const singleProbs = weights.map(w => w / total);
-      return { weights, total, singleProbs };
+      return { weights, total, singleProbs: weights.map(w => w / total) };
     }
 
     function cumulativeChanceUpTo100(singleProb, boxesCount) {
       if (boxesCount <= 0 || singleProb <= 0) return 0;
       if (singleProb >= 1) return 100;
-      const chancePct = (1 - Math.pow(1 - singleProb, boxesCount)) * 100;
-      return Math.min(100, Math.max(0, chancePct));
+      return Math.min(100, (1 - Math.pow(1 - singleProb, boxesCount)) * 100);
     }
 
-    /* =========================================================================
-       SIMULATOR STATE & FUNCTIONS
-       ========================================================================= */
     let simTokens = 1500;
     let simInventory = [];
 
@@ -1729,10 +1778,6 @@
     function addSimTokens(amount) {
       setSimTokens(simTokens + amount);
       showToast(`Added +${amount} tokens!`);
-    }
-
-    function updateSimState() {
-      renderSimBoxes();
     }
 
     function pickWeightedFood(box, boost) {
@@ -1763,19 +1808,14 @@
     function openSimulatedBox(boxId) {
       const box = MARKET_BOXES.find(b => b.id === boxId);
       if (!box) return;
-
-      const qtyInput = document.getElementById("sim-qty-input");
-      const boostSelect = document.getElementById("sim-boost-select");
-      const requestedQty = Math.max(1, Math.min(100, Math.floor(Number(qtyInput?.value) || 1)));
-      const boost = Number(boostSelect?.value || 1);
-
+      const qty = Math.max(1, Math.min(100, Math.floor(Number(document.getElementById("sim-qty-input")?.value) || 1)));
+      const boost = Number(document.getElementById("sim-boost-select")?.value || 1);
       const affordable = Math.floor(simTokens / box.cost);
       if (affordable < 1) {
         showToast(`Not enough tokens for ${box.name} (${box.cost} needed).`);
         return;
       }
-
-      const actualQty = Math.min(requestedQty, affordable);
+      const actualQty = Math.min(qty, affordable);
       setSimTokens(simTokens - actualQty * box.cost);
 
       let lastPull = null;
@@ -1785,34 +1825,15 @@
         simInventory.unshift(lastPull);
       }
 
-      renderLatestPull(lastPull, actualQty);
-      renderSessionInventory();
-    }
-
-    function renderLatestPull(pull, qtyOpened) {
-      const stage = document.getElementById("sim-pull-stage");
-      if (!stage || !pull) return;
-      stage.innerHTML = `
-        <img src="${pull.img}" alt="${pull.name}" />
-        <div style="font-weight: 800; font-size: 1.05rem;">${pull.name}</div>
-        <div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 2px;">From ${pull.boxName}</div>
-        <span class="rarity-badge r-${pull.rarity}">${pull.rarity}</span>
-        ${qtyOpened > 1 ? `<div style="font-size: 0.75rem; color: var(--accent-cyan); margin-top: 8px;">Opened ${qtyOpened}x boxes</div>` : ""}
+      document.getElementById("sim-pull-stage").innerHTML = `
+        <img src="${lastPull.img}" alt="${lastPull.name}" />
+        <div style="font-weight: 800; font-size: 1.05rem;">${lastPull.name}</div>
+        <div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 2px;">From ${lastPull.boxName}</div>
+        <span class="rarity-badge r-${lastPull.rarity}" style="margin-top:6px;">${lastPull.rarity}</span>
       `;
-    }
 
-    function renderSessionInventory() {
-      const list = document.getElementById("sim-inventory-list");
-      const countEl = document.getElementById("sim-pulled-count");
-      if (countEl) countEl.textContent = `${simInventory.length} Pulled`;
-      if (!list) return;
-
-      if (simInventory.length === 0) {
-        list.innerHTML = `<p style="color: var(--text-muted); font-size: 0.82rem;">No Foods pulled yet.</p>`;
-        return;
-      }
-
-      list.innerHTML = simInventory.slice(0, 40).map(item => `
+      document.getElementById("sim-pulled-count").textContent = `${simInventory.length} Pulled`;
+      document.getElementById("sim-inventory-list").innerHTML = simInventory.slice(0, 40).map(item => `
         <div class="inv-item">
           <div class="inv-left">
             <img src="${item.img}" alt="${item.name}" />
@@ -1821,33 +1842,29 @@
               <div style="font-size: 0.72rem; color: var(--text-muted);">${item.boxName}</div>
             </div>
           </div>
-          <span class="rarity-badge r-${item.rarity}" style="margin-top:0;">${item.rarity}</span>
+          <span class="rarity-badge r-${item.rarity}">${item.rarity}</span>
         </div>
       `).join("");
     }
 
     function clearSessionInventory() {
       simInventory = [];
-      renderSessionInventory();
+      document.getElementById("sim-pulled-count").textContent = "0 Pulled";
+      document.getElementById("sim-inventory-list").innerHTML = `<p style="color: var(--text-muted); font-size: 0.82rem;">No Foods pulled yet.</p>`;
     }
 
-    /* =========================================================================
-       CALCULATOR TO CHANCES
-       ========================================================================= */
     function populateCalculatorBoxes() {
       const sel = document.getElementById("calc-box");
       if (!sel) return;
-      sel.innerHTML = MARKET_BOXES.map(b =>
-        `<option value="${b.id}">${b.name} (${b.cost} Tokens)</option>`
-      ).join("");
+      sel.innerHTML = MARKET_BOXES.map(b => `<option value="${b.id}">${b.name} (${b.cost} Tokens)</option>`).join("");
     }
 
     function renderCalculator() {
       const tokens = Math.max(0, Math.floor(Number(document.getElementById("calc-tokens")?.value) || 0));
       const boxId = document.getElementById("calc-box")?.value || MARKET_BOXES[0].id;
       const boost = Number(document.getElementById("calc-boost")?.value || 1);
-
       const box = MARKET_BOXES.find(b => b.id === boxId) || MARKET_BOXES[0];
+
       const boxesCount = Math.floor(tokens / box.cost);
       const usedTokens = boxesCount * box.cost;
       const leftoverTokens = tokens - usedTokens;
@@ -1857,29 +1874,18 @@
       document.getElementById("calc-token-split").textContent = `${usedTokens.toLocaleString()} / ${leftoverTokens.toLocaleString()}`;
 
       const { singleProbs } = getBoostedWeights(box, boost);
-      const tbody = document.getElementById("calc-table-body");
-      if (!tbody) return;
-
-      tbody.innerHTML = box.foods.map((food, idx) => {
+      document.getElementById("calc-table-body").innerHTML = box.foods.map((food, idx) => {
         const p = singleProbs[idx] || 0;
         const cumPct = cumulativeChanceUpTo100(p, boxesCount);
-        const singlePct = (p * 100);
+        const singlePct = p * 100;
         const formattedCum = cumPct >= 99.995 && boxesCount > 0 ? "100.00%" : `${cumPct.toFixed(2)}%`;
-
         return `
           <tr>
-            <td>
-              <div class="food-cell">
-                <img src="${food.img}" alt="${food.name}" />
-                <span>${food.name}</span>
-              </div>
-            </td>
-            <td><span class="rarity-badge r-${food.rarity}" style="margin-top:0;">${food.rarity}</span></td>
+            <td><div class="food-cell"><img src="${food.img}" alt="${food.name}" /><span>${food.name}</span></div></td>
+            <td><span class="rarity-badge r-${food.rarity}">${food.rarity}</span></td>
             <td class="mono">${singlePct < 0.01 ? singlePct.toFixed(4) : singlePct.toFixed(2)}%</td>
             <td>
-              <div class="prob-bar-wrap">
-                <div class="prob-bar-fill" style="width: ${cumPct.toFixed(1)}%;"></div>
-              </div>
+              <div class="prob-bar-wrap"><div class="prob-bar-fill" style="width: ${cumPct.toFixed(1)}%;"></div></div>
               <strong class="mono">${formattedCum}</strong>
             </td>
           </tr>
@@ -1887,79 +1893,43 @@
       }).join("");
     }
 
-    /* =========================================================================
-       VALUE GUIDE
-       ========================================================================= */
     const RARITY_BASE_VALUE = {
-      uncommon: 15,
-      rare: 45,
-      epic: 140,
-      legendary: 450,
-      chroma: 1600,
-      unique: 3200,
-      mystical: 8500,
-      heavenly: 25000
+      uncommon: 15, rare: 45, epic: 140, legendary: 450,
+      chroma: 1600, unique: 3200, mystical: 8500, heavenly: 25000
     };
 
-    function buildAllFoodsValuation() {
-      const rows = [];
-      MARKET_BOXES.forEach(box => {
-        const { singleProbs } = getBoostedWeights(box, 1);
-        box.foods.forEach((food, idx) => {
-          const p = Math.max(0.000001, singleProbs[idx] || 0.0001);
-          const rarityBase = RARITY_BASE_VALUE[food.rarity] || 20;
-          const rarityBonus = Math.round(Math.min(15000, (1 / p) * 1.8));
-          const boxTierFactor = box.cost / 30;
-          const estValue = Math.max(10, Math.round((rarityBase + rarityBonus) * (0.75 + 0.25 * boxTierFactor)));
-
-          rows.push({
-            name: food.name,
-            img: food.img,
-            boxName: box.name,
-            rarity: food.rarity,
-            chance: food.chance,
-            singleProbPct: p * 100,
-            estValue
-          });
-        });
+    const ALL_FOOD_VALUES = MARKET_BOXES.flatMap(box => {
+      const { singleProbs } = getBoostedWeights(box, 1);
+      return box.foods.map((food, idx) => {
+        const p = Math.max(0.000001, singleProbs[idx] || 0.0001);
+        const estValue = Math.max(10, Math.round(
+          ((RARITY_BASE_VALUE[food.rarity] || 20) + Math.min(15000, (1 / p) * 1.8)) *
+          (0.75 + 0.25 * (box.cost / 30))
+        ));
+        return { name: food.name, img: food.img, boxName: box.name, rarity: food.rarity, singleProbPct: p * 100, estValue };
       });
-      return rows;
-    }
-
-    const ALL_FOOD_VALUES = buildAllFoodsValuation();
+    });
 
     function renderValueGuide() {
       const q = (document.getElementById("val-search")?.value || "").trim().toLowerCase();
       const rarityFilter = document.getElementById("val-rarity")?.value || "all";
       const sortBy = document.getElementById("val-sort")?.value || "value-desc";
 
-      let list = ALL_FOOD_VALUES.filter(item => {
-        const matchesRarity = rarityFilter === "all" || item.rarity === rarityFilter;
-        const matchesQuery = !q ||
-          item.name.toLowerCase().includes(q) ||
-          item.boxName.toLowerCase().includes(q) ||
-          item.rarity.toLowerCase().includes(q);
-        return matchesRarity && matchesQuery;
-      });
+      let list = ALL_FOOD_VALUES.filter(item =>
+        (rarityFilter === "all" || item.rarity === rarityFilter) &&
+        (!q || item.name.toLowerCase().includes(q) || item.boxName.toLowerCase().includes(q) || item.rarity.toLowerCase().includes(q))
+      );
 
       if (sortBy === "value-desc") list.sort((a, b) => b.estValue - a.estValue);
       else if (sortBy === "value-asc") list.sort((a, b) => a.estValue - b.estValue);
       else if (sortBy === "name-asc") list.sort((a, b) => a.name.localeCompare(b.name));
       else if (sortBy === "chance-asc") list.sort((a, b) => a.singleProbPct - b.singleProbPct);
 
-      const tbody = document.getElementById("val-table-body");
-      if (!tbody) return;
-
-      tbody.innerHTML = list.map(item => `
+      document.getElementById("val-table-body").innerHTML = list.map(item => `
         <tr>
-          <td>
-            <div class="food-cell">
-              <img src="${item.img}" alt="${item.name}" />
-              <span>${item.name}</span>
-            </div>
-          </td>
+          <td><div class="food-cell"><img src="${item.img}" alt="${item.name}" /><span>${item.name}</span></div></td>
           <td style="color: var(--text-secondary);">${item.boxName}</td>
-          <td><span class="rarity-badge r-${item.rarity}" style="margin-top:0;">${item.rarity}</span></td>
+          <td><span class="rarity-badge r-${item.rarity}">${item.rarity}</span></td>
           <td class="mono">${item.singleProbPct < 0.01 ? item.singleProbPct.toFixed(4) : item.singleProbPct.toFixed(2)}%</td>
           <td class="mono" style="font-weight: 700; color: var(--accent-emerald);">~${item.estValue.toLocaleString()} Tokens</td>
         </tr>
@@ -1967,7 +1937,7 @@
     }
 
     /* =========================================================================
-       NAVIGATION & UTILITIES
+       NAVIGATION & TOAST
        ========================================================================= */
     const ROUTE_MAP = {
       "index.html": "view-index",
@@ -1979,14 +1949,9 @@
 
     function navigateTo(route) {
       const targetId = ROUTE_MAP[route] || "view-index";
-      document.querySelectorAll(".view-section").forEach(sec => sec.classList.remove("active"));
-      const activeSec = document.getElementById(targetId);
-      if (activeSec) activeSec.classList.add("active");
-
-      document.querySelectorAll(".nav-btn").forEach(btn => {
-        btn.classList.toggle("active", btn.getAttribute("data-route") === route);
-      });
-
+      document.querySelectorAll(".view-section").forEach(s => s.classList.remove("active"));
+      document.getElementById(targetId)?.classList.add("active");
+      document.querySelectorAll(".nav-btn").forEach(b => b.classList.toggle("active", b.getAttribute("data-route") === route));
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
@@ -2005,11 +1970,13 @@
       toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
     }
 
-    /* Initialize */
+    /* Boot */
     syncAgeDisplay();
     renderGames("all");
+    buildDailyGuessDeck();
+    renderCurrentGuessFood();
+    initDailyPuzzle();
     renderSimBoxes();
-    renderSessionInventory();
     populateCalculatorBoxes();
     renderCalculator();
     renderValueGuide();
