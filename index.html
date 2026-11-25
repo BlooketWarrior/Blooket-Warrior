@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blooket Warrior | Hub & Foodit Toolkit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <style>
+    :root {
+      --bg-canvas: #090d16;
+      --bg-surface: #111827;
+      --bg-surface-2: #172033;
+      --bg-glass: rgba(17, 24, 39, 0.82);
+      --border: rgba(148, 163, 184, 0.14);
+      --border-strong: rgba(56, 189, 248, 0.35);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-cyan: #38bdf8;
+      --accent-indigo: #818cf8;
+      --accent-emerald: #34d399;
+      --accent-amber: #fbbf24;
+      --accent-rose: #fb7185;
+      --accent-purple: #c084fc;
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.45);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(56, 189, 248, 0.14), transparent 36%),
+        radial-gradient(circle at 88% 12%, rgba(129, 140, 248, 0.14), transparent 38%),
+        radial-gradient(circle at 50% 95%, rgba(52, 211, 153, 0.08), transparent 45%),
+        var(--bg-canvas);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    code, .mono, .stat-num {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Top Navigation Bar */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: var(--bg-glass);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-primary);
+      cursor: pointer;
+    }
+
+    .brand-mark img {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 1.5px solid var(--border-strong);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.25);
+    }
+
+    .brand-title {
+      font-weight: 800;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: block;
+      font-weight: 500;
+    }
+
+    .nav-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      background: rgba(9, 13, 22, 0.65);
+      padding: 5px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-secondary);
+      padding: 8px 14px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.18s ease;
+    }
+
+    .nav-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .nav-btn.active {
+      color: #06101d;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-emerald));
+      border-color: transparent;
+      box-shadow: 0 6px 20px rgba(56, 189, 248, 0.28);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 32px 24px 72px;
+    }
+
+    .view-section {
+      display: none;
+      animation: fadeSlideIn 0.28s ease;
+    }
+
+    .view-section.active {
+      display: block;
+    }
+
+    @keyframes fadeSlideIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Cards & Surfaces */
+    .card {
+      background: linear-gradient(180deg, rgba(23, 32, 51, 0.85), rgba(17, 24, 39, 0.92));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .section-kicker {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .section-heading {
+      font-size: clamp(1.5rem, 2.8vw, 2.1rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      max-width: 640px;
+      margin-top: 6px;
+    }
+
+    /* Profile Hero Layout */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 920px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .avatar-card {
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .avatar-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 110px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.22), rgba(129, 140, 248, 0.22));
+      z-index: 0;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      z-index: 1;
+      width: 148px;
+      height: 148px;
+      margin: 24px auto 16px;
+      border-radius: 28px;
+      padding: 4px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo), var(--accent-emerald));
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+      background: var(--bg-surface);
+      display: block;
+    }
+
+    .profile-name {
+      position: relative;
+      z-index: 1;
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .profile-role {
+      position: relative;
+      z-index: 1;
+      color: var(--accent-cyan);
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .badge-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .pill-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .pill-badge.emerald {
+      background: rgba(52, 211, 153, 0.12);
+      border-color: rgba(52, 211, 153, 0.3);
+      color: var(--accent-emerald);
+    }
+
+    .pill-badge.amber {
+      background: rgba(251, 191, 36, 0.12);
+      border-color: rgba(251, 191, 36, 0.3);
+      color: var(--accent-amber);
+    }
+
+    .handles-box {
+      position: relative;
+      z-index: 1;
+      margin-top: 20px;
+      display: grid;
+      gap: 10px;
+      text-align: left;
+    }
+
+    .handle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--bg-canvas);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-size: 0.84rem;
+    }
+
+    .handle-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      display: block;
+    }
+
+    .copy-btn {
+      background: rgba(56, 189, 248, 0.14);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      background: rgba(56, 189, 248, 0.25);
+    }
+
+    .bio-card p {
+      color: #cbd5e1;
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+
+    .age-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 10px;
+      border-radius: 8px;
+      background: rgba(56, 189, 248, 0.16);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--accent-cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .meta-note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(9, 13, 22, 0.65);
+      border: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quick-nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    .quick-tile {
+      background: var(--bg-surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+      color: var(--text-primary);
+    }
+
+    .quick-tile:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      background: rgba(30, 41, 66, 0.95);
+    }
+
+    .quick-tile i {
+      font-size: 1.2rem;
+      color: var(--accent-cyan);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .quick-tile strong {
+      display: block;
+      font-size: 0.96rem;
+      margin-bottom: 4px;
+    }
+
+    .quick-tile span {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    /* Games Grid */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .filter-chip {
+      background: var(--bg-surface);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .filter-chip:hover {
+      color: var(--text-primary);
+      border-color: rgba(148, 163, 184, 0.35);
+    }
+
+    .filter-chip.active {
+      background: rgba(56, 189, 248, 0.16);
+      color: var(--accent-cyan);
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .game-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .game-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+    }
+
+    .game-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .game-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.15rem;
+      background: rgba(56, 189, 248, 0.12);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .role-tag {
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+    }
+
+    .role-owned {
+      background: rgba(52, 211, 153, 0.14);
+      color: var(--accent-emerald);
+      border-color: rgba(52, 211, 153, 0.35);
+    }
+
+    .role-co {
+      background: rgba(129, 140, 248, 0.15);
+      color: var(--accent-indigo);
+      border-color: rgba(129, 140, 248, 0.35);
+    }
+
+    .role-orig {
+      background: rgba(251, 191, 36, 0.14);
+      color: var(--accent-amber);
+      border-color: rgba(251, 191, 36, 0.35);
+    }
+
+    .role-helped {
+      background: rgba(56, 189, 248, 0.13);
+      color: var(--accent-cyan);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .game-card h3 {
+      font-size: 1.12rem;
+      font-weight: 700;
+    }
+
+    .game-card p {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+    }
+
+    /* Simulator Layout */
+    .sim-layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 1020px) {
+      .sim-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .controls-strip {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .ctrl-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+    }
+
+    .ctrl-box label {
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .ctrl-box input,
+    .ctrl-box select {
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      outline: none;
+    }
+
+    .ctrl-box input:focus,
+    .ctrl-box select:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-emerald));
+      color: #06101d;
+      border: none;
+      border-radius: var(--radius-sm);
+      padding: 10px 16px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.06);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface-2);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: border-color 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-strong);
+    }
+
+    .boxes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 14px;
+    }
+
+    .box-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .box-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      background: var(--bg-surface-2);
+    }
+
+    .box-card img {
+      width: 78px;
+      height: 78px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.45));
+    }
+
+    .box-card-name {
+      font-weight: 700;
+      font-size: 0.94rem;
+    }
+
+    .box-card-meta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .price-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(251, 191, 36, 0.14);
+      color: var(--accent-amber);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+    }
+
+    .count-pill {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      padding: 3px 7px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .side-panel {
+      position: sticky;
+      top: 84px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .pull-stage {
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--bg-canvas);
+      border: 1px dashed rgba(148, 163, 184, 0.22);
+      border-radius: var(--radius-md);
+      padding: 20px;
+    }
+
+    .pull-stage img {
+      width: 112px;
+      height: 112px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      animation: popReveal 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    @keyframes popReveal {
+      from {
+        transform: scale(0.72);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .rarity-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 6px;
+    }
+
+    .r-uncommon { background: rgba(148, 163, 184, 0.18); color: #cbd5e1; }
+    .r-rare { background: rgba(56, 189, 248, 0.18); color: #38bdf8; }
+    .r-epic { background: rgba(192, 132, 252, 0.18); color: #c084fc; }
+    .r-legendary { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+    .r-chroma { background: rgba(52, 211, 153, 0.2); color: #34d399; }
+    .r-unique { background: rgba(251, 113, 133, 0.2); color: #fb7185; }
+    .r-mystical { background: rgba(129, 140, 248, 0.24); color: #a5b4fc; }
+    .r-heavenly { background: linear-gradient(135deg, rgba(251, 191, 36, 0.28), rgba(56, 189, 248, 0.28)); color: #fef08a; }
+
+    .inv-list {
+      max-height: 240px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .inv-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      background: var(--bg-canvas);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.83rem;
+    }
+
+    .inv-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .inv-left img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    /* Calculator */
+    .calc-top-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .field-group {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+    }
+
+    .field-group label {
+      display: block;
+      font-size: 0.76rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .field-group input,
+    .field-group select {
+      width: 100%;
+      background: var(--bg-canvas);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 0.92rem;
+      outline: none;
+    }
+
+    .field-group input:focus,
+    .field-group select:focus {
+      border-color: var(--accent-cyan);
+    }
+
+    .summary-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .stat-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px;
+    }
+
+    .stat-box small {
+      color: var(--text-muted);
+      font-size: 0.76rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat-num {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+
+    /* Data Table */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    th {
+      background: var(--bg-surface-2);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+      vertical-align: middle;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .food-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+    }
+
+    .food-cell img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: var(--bg-canvas);
+      padding: 3px;
+    }
+
+    .prob-bar-wrap {
+      width: 140px;
+      height: 8px;
+      background: rgba(148, 163, 184, 0.14);
+      border-radius: 999px;
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+
+    .prob-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
+      border-radius: 999px;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 300;
+      background: var(--bg-surface-2);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+      padding: 12px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.86rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.22s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand-mark" onclick="navigateTo('index.html')">
+        <img src="https://i.postimg.cc/htNhD5Z3/Blooket-Warrior.gif" alt="Blooket Warrior" />
+        <div>
+          <span class="brand-title">Blooket Warrior</span>
+          <span class="brand-sub">Creator Hub &amp; Foodit Tools</span>
+        </div>
+      </div>
+
+      <nav class="nav-pills" aria-label="Primary Navigation">
+        <button class="nav-btn active" data-route="index.html" onclick="navigateTo('index.html')">
+          <i class="fa-solid fa-user"></i> Profile
+        </button>
+        <button class="nav-btn" data-route="games.html" onclick="navigateTo('games.html')">
+          <i class="fa-solid fa-gamepad"></i> Games
+        </button>
+        <button class="nav-btn" data-route="market-sim.html" onclick="navigateTo('market-sim.html')">
+          <i class="fa-solid fa-box-open"></i> Foodit Sim. Box
+        </button>
+        <button class="nav-btn" data-route="calculator.html" onclick="navigateTo('calculator.html')">
+          <i class="fa-solid fa-percent"></i> Chances Calc
+        </button>
+        <button class="nav-btn" data-route="value-guide.html" onclick="navigateTo('value-guide.html')">
+          <i class="fa-solid fa-gem"></i> Value Guide
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- 1. PROFILE / HOME (index.html) -->
+    <section id="view-index" class="view-section active">
+      <div class="profile-grid">
+        <div class="card avatar-card">
+          <div class="avatar-wrap">
+            <img src="https://i.postimg.cc/htNhD5Z3/Blooket-Warrior.gif" alt="Blooket Warrior Avatar" />
+          </div>
+          <h1 class="profile-name">Blooket Warrior</h1>
+          <div class="profile-role">Owner &amp; Coder • Baseball RHP</div>
+
+          <div class="badge-row">
+            <span class="pill-badge emerald"><i class="fa-solid fa-baseball"></i> RHP</span>
+            <span class="pill-badge amber"><i class="fa-solid fa-cross"></i> Believer of Jesus</span>
+          </div>
+
+          <div class="handles-box">
+            <div class="handle-item">
+              <div>
+                <span class="handle-label">Foodit Username</span>
+                <code id="handle-foodit">BlooketWarriorYT</code>
+              </div>
+              <button class="copy-btn" onclick="copyText('BlooketWarriorYT', 'Foodit username copied!')">
+                <i class="fa-regular fa-copy"></i> Copy
+              </button>
+            </div>
+            <div class="handle-item">
+              <div>
+                <span class="handle-label">Blooket Username</span>
+                <code id="handle-blooket">blooketWarrior2</code>
+              </div>
+              <button class="copy-btn" onclick="copyText('blooketWarrior2', 'Blooket username copied!')">
+                <i class="fa-regular fa-copy"></i> Copy
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card bio-card">
+          <div class="section-kicker">About Me</div>
+          <h2 class="section-heading" style="margin-bottom: 14px;">Creator Profile</h2>
+          <p id="bio-paragraph">
+            Hi my name is Blooket Warrior and I am a Foodit Owner/Coder, Scratchlet Owner/Coder, etc... I am also a baseball player a RHP. I am <span class="age-chip" id="live-age-badge">16 years old</span>. My Foodit username is <strong>BlooketWarriorYT</strong> and my Blooket username is <strong>blooketWarrior2</strong>. I am a Christian/Believer of Jesus.
+          </p>
+
+          <div class="meta-note">
+            <i class="fa-solid fa-calendar-check" style="color: var(--accent-cyan);"></i>
+            <span>
+              Age auto-increments every year on <strong>February 28th</strong> (anchored at 16 on Feb 28, 2026 — current calculated age: <strong id="age-detail-text">16</strong>).
+            </span>
+          </div>
+
+          <div class="quick-nav-grid">
+            <button class="quick-tile" onclick="navigateTo('games.html')">
+              <i class="fa-solid fa-gamepad"></i>
+              <strong>Games</strong>
+              <span>8 titles across Owned, Co-Owned &amp; Helped</span>
+            </button>
+            <button class="quick-tile" onclick="navigateTo('market-sim.html')">
+              <i class="fa-solid fa-box-open"></i>
+              <strong>Foodit Sim. Box</strong>
+              <span>Open boxes, test boosts &amp; track pulls</span>
+            </button>
+            <button class="quick-tile" onclick="navigateTo('calculator.html')">
+              <i class="fa-solid fa-calculator"></i>
+              <strong>Calculator to Chances</strong>
+              <span>Tokens to boxes &amp; exact odds up to 100%</span>
+            </button>
+            <button class="quick-tile" onclick="navigateTo('value-guide.html')">
+              <i class="fa-solid fa-scale-balanced"></i>
+              <strong>Foodit Value Guide</strong>
+              <span>Estimated values for every Food</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. GAMES (games.html) -->
+    <section id="view-games" class="view-section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Portfolio</div>
+          <h2 class="section-heading">Games I Made or Helped</h2>
+          <p class="section-desc">Projects owned, co-owned, originally started, or contributed to.</p>
+        </div>
+      </div>
+
+      <div class="filter-bar" id="games-filter-bar">
+        <button class="filter-chip active" data-filter="all" onclick="filterGames('all', this)">All (8)</button>
+        <button class="filter-chip" data-filter="Owned" onclick="filterGames('Owned', this)">Owned</button>
+        <button class="filter-chip" data-filter="Helped/Co-Owned" onclick="filterGames('Helped/Co-Owned', this)">Helped/Co-Owned</button>
+        <button class="filter-chip" data-filter="Originally Owned" onclick="filterGames('Originally Owned', this)">Originally Owned</button>
+        <button class="filter-chip" data-filter="Originally Helped" onclick="filterGames('Originally Helped', this)">Originally Helped</button>
+        <button class="filter-chip" data-filter="Helped" onclick="filterGames('Helped', this)">Helped</button>
+      </div>
+
+      <div class="games-grid" id="games-grid"></div>
+    </section>
+
+    <!-- 3. FOODIT SIM. BOX (market-sim.html) -->
+    <section id="view-market-sim" class="view-section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Box Simulator</div>
+          <h2 class="section-heading">Foodit Sim. Box</h2>
+          <p class="section-desc">Click any box to simulate openings using the market drop table and boost rules.</p>
+        </div>
+      </div>
+
+      <div class="controls-strip">
+        <div class="ctrl-box">
+          <label for="sim-tokens-input"><i class="fa-solid fa-coins" style="color: var(--accent-amber);"></i> Tokens</label>
+          <input type="number" id="sim-tokens-input" min="0" value="1500" style="width: 110px;" onchange="setSimTokens(this.value)" />
+        </div>
+        <button class="btn-secondary" onclick="addSimTokens(500)">+500 Tokens</button>
+        <div class="ctrl-box">
+          <label for="sim-boost-select">Boost</label>
+          <select id="sim-boost-select" onchange="updateSimState()">
+            <option value="1">1x Normal</option>
+            <option value="1.5">1.5x Boost</option>
+            <option value="2">2x Boost</option>
+          </select>
+        </div>
+        <div class="ctrl-box">
+          <label for="sim-qty-input">Open Qty</label>
+          <input type="number" id="sim-qty-input" min="1" max="100" value="1" style="width: 72px;" />
+        </div>
+      </div>
+
+      <div class="sim-layout">
+        <div class="boxes-grid" id="sim-boxes-grid"></div>
+
+        <aside class="side-panel">
+          <div class="card">
+            <div class="section-kicker" style="margin-bottom: 8px;">Latest Pull</div>
+            <div class="pull-stage" id="sim-pull-stage">
+              <i class="fa-solid fa-sparkles" style="font-size: 2rem; color: var(--text-muted); margin-bottom: 10px;"></i>
+              <p style="color: var(--text-secondary); font-size: 0.9rem;">Select a box on the left to open Foods.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <div class="section-kicker" style="margin-bottom: 2px;">Session Bag</div>
+                <strong id="sim-pulled-count">0 Pulled</strong>
+              </div>
+              <button class="copy-btn" onclick="clearSessionInventory()">Clear</button>
+            </div>
+            <div class="inv-list" id="sim-inventory-list">
+              <p style="color: var(--text-muted); font-size: 0.82rem;">No Foods pulled yet.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- 4. CALCULATOR TO CHANCES (calculator.html) -->
+    <section id="view-calculator" class="view-section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Odds Engine</div>
+          <h2 class="section-heading">Foodit Calculator to Chances</h2>
+          <p class="section-desc">Enter your token amount to calculate boxes affordable and exact pull chances up to 100%.</p>
+        </div>
+      </div>
+
+      <div class="calc-top-grid">
+        <div class="field-group">
+          <label for="calc-tokens">Tokens Available</label>
+          <input type="number" id="calc-tokens" min="0" value="1000" oninput="renderCalculator()" />
+        </div>
+        <div class="field-group">
+          <label for="calc-box">Select Box</label>
+          <select id="calc-box" onchange="renderCalculator()"></select>
+        </div>
+        <div class="field-group">
+          <label for="calc-boost">Boost Multiplier</label>
+          <select id="calc-boost" onchange="renderCalculator()">
+            <option value="1">1x Normal</option>
+            <option value="1.5">1.5x Boost</option>
+            <option value="2">2x Boost</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="summary-stats">
+        <div class="stat-box">
+          <small>Box Cost</small>
+          <div class="stat-num" id="calc-box-cost">30</div>
+        </div>
+        <div class="stat-box">
+          <small>Boxes You Can Open</small>
+          <div class="stat-num" id="calc-boxes-count">33</div>
+        </div>
+        <div class="stat-box">
+          <small>Tokens Used / Left</small>
+          <div class="stat-num" id="calc-token-split" style="font-size: 1.05rem;">990 / 10</div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Rarity</th>
+              <th>Single-Box Chance</th>
+              <th>Chance (Up to 100%)</th>
+            </tr>
+          </thead>
+          <tbody id="calc-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. VALUE GUIDE (value-guide.html) -->
+    <section id="view-value-guide" class="view-section">
+      <div class="section-header">
+        <div>
+          <div class="section-kicker">Trading Reference</div>
+          <h2 class="section-heading">Foodit Value Guide</h2>
+          <p class="section-desc">Estimated token/trade values for every Food based on rarity, drop chance, and box cost.</p>
+        </div>
+      </div>
+
+      <div class="calc-top-grid">
+        <div class="field-group">
+          <label for="val-search">Search Food or Box</label>
+          <input type="text" id="val-search" placeholder="e.g. Blooket Warrior, Milk, Space..." oninput="renderValueGuide()" />
+        </div>
+        <div class="field-group">
+          <label for="val-rarity">Filter by Rarity</label>
+          <select id="val-rarity" onchange="renderValueGuide()">
+            <option value="all">All Rarities</option>
+            <option value="uncommon">Uncommon</option>
+            <option value="rare">Rare</option>
+            <option value="epic">Epic</option>
+            <option value="legendary">Legendary</option>
+            <option value="chroma">Chroma</option>
+            <option value="unique">Unique</option>
+            <option value="mystical">Mystical</option>
+            <option value="heavenly">Heavenly</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="val-sort">Sort By</label>
+          <select id="val-sort" onchange="renderValueGuide()">
+            <option value="value-desc">Highest Value First</option>
+            <option value="value-asc">Lowest Value First</option>
+            <option value="name-asc">Name (A–Z)</option>
+            <option value="chance-asc">Rarest Drop Chance</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Box</th>
+              <th>Rarity</th>
+              <th>Drop Chance</th>
+              <th>Est. Value</th>
+            </tr>
+          </thead>
+          <tbody id="val-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* =========================================================================
+       AUTO-UPDATING AGE (Increments every year on February 28th)
+       Base anchor: 16 years old on February 28, 2026.
+       ========================================================================= */
+    function calculateCurrentAge(now = new Date()) {
+      const baseAge = 16;
+      const baseYear = 2026;
+      const year = now.getFullYear();
+      const month = now.getMonth(); // 0-indexed: 1 = February
+      const day = now.getDate();
+
+      // Birthday anniversary in a given year occurs on Feb 28
+      let anniversariesPassed = year - baseYear;
+      const beforeFeb28ThisYear = (month === 0) || (month === 1 && day < 28);
+      if (beforeFeb28ThisYear) {
+        anniversariesPassed -= 1;
+      }
+      return Math.max(0, baseAge + anniversariesPassed);
+    }
+
+    function syncAgeDisplay() {
+      const age = calculateCurrentAge();
+      const badge = document.getElementById("live-age-badge");
+      const detail = document.getElementById("age-detail-text");
+      if (badge) badge.textContent = `${age} years old`;
+      if (detail) detail.textContent = age;
+    }
+
+    /* =========================================================================
+       GAMES ROSTER
+       ========================================================================= */
+    const GAMES_LIST = [
+      { name: "Foodit", role: "Owned", icon: "fa-burger", desc: "Owned platform and game experience featuring boxes, foods, and market systems." },
+      { name: "Scratchlet", role: "Helped/Co-Owned", icon: "fa-code-branch", desc: "Co-owned and helped build game features and community systems." },
+      { name: "Ploopit", role: "Originally Helped", icon: "fa-shapes", desc: "Originally helped with early development and setup." },
+      { name: "Warriet", role: "Originally Owned", icon: "fa-shield-halved", desc: "Originally owned project and creator space." },
+      { name: "Earthlet", role: "Helped", icon: "fa-earth-americas", desc: "Helped with development and content." },
+      { name: "Mangolet", role: "Helped", icon: "fa-lemon", desc: "Helped contribute to game features and assets." },
+      { name: "Oceanlet", role: "Helped", icon: "fa-water", desc: "Helped with ocean-themed game elements." },
+      { name: "Picklet", role: "Helped", icon: "fa-seedling", desc: "Helped build and support game mechanics." }
+    ];
+
+    function roleBadgeClass(role) {
+      if (role === "Owned") return "role-owned";
+      if (role === "Helped/Co-Owned") return "role-co";
+      if (role === "Originally Owned") return "role-orig";
+      return "role-helped";
+    }
+
+    function renderGames(filter = "all") {
+      const grid = document.getElementById("games-grid");
+      if (!grid) return;
+      const items = filter === "all" ? GAMES_LIST : GAMES_LIST.filter(g => g.role === filter);
+      grid.innerHTML = items.map(g => `
+        <article class="game-card">
+          <div>
+            <div class="game-top">
+              <div class="game-icon-box"><i class="fa-solid ${g.icon}"></i></div>
+              <span class="role-tag ${roleBadgeClass(g.role)}">${g.role}</span>
+            </div>
+            <h3 style="margin-top: 14px;">${g.name}</h3>
+            <p style="margin-top: 6px;">${g.desc}</p>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    function filterGames(role, btnEl) {
+      document.querySelectorAll("#games-filter-bar .filter-chip").forEach(c => c.classList.remove("active"));
+      if (btnEl) btnEl.classList.add("active");
+      renderGames(role);
+    }
+
+    /* =========================================================================
+       FOODIT MARKET BOXES & DROP TABLES (From market (1).txt)
+       ========================================================================= */
+    const MARKET_BOXES = [
+      {
+        id: "milk",
+        name: "Milk Box",
+        cost: 30,
+        img: "https://i.postimg.cc/gj2mQYfr/milkbox.png",
+        foods: [
+          { name: "Banana Milk", img: "https://i.postimg.cc/0rk43L7m/banana-Milk.png", rarity: "uncommon", chance: 30 },
+          { name: "Strawberry Milk", img: "https://i.postimg.cc/YjrPVJQ6/strawberry-Milk.png", rarity: "uncommon", chance: 25 },
+          { name: "Blueberry Milk", img: "https://i.postimg.cc/z3zQM9Th/blueberry-Milk.png", rarity: "rare", chance: 15 },
+          { name: "Grape Milk", img: "https://i.postimg.cc/fkzPF6Yb/grape-Milk.png", rarity: "rare", chance: 10 },
+          { name: "Chocolate Milk", img: "https://i.postimg.cc/HjYNKfbs/chocolate-Milk.png", rarity: "epic", chance: 0.8 },
+          { name: "Warriet Milk", img: "https://i.postimg.cc/wB35wMNV/Warriet-Milk.png", rarity: "legendary", chance: 1 },
+          { name: "Bubble Gum Milk", img: "https://i.postimg.cc/qgJFY92B/bubblegum-Milk.png", rarity: "chroma", chance: 0.05 },
+          { name: "Cotton Candy Milk", img: "https://i.postimg.cc/mhWPz0Px/cottoncandy-Milk.png", rarity: "chroma", chance: 0.05 },
+          { name: "Space Milk", img: "https://i.postimg.cc/9QKJFHgQ/spacemilk.png", rarity: "chroma", chance: 0.05 },
+          { name: "Pumpkin Spice Milk", img: "https://i.postimg.cc/xd6V9tjQ/pumpkin-Spicemilk.png", rarity: "chroma", chance: 0.05 },
+          { name: "Cat Milk", img: "https://i.postimg.cc/N2jPHHQV/cat-Milk.png", rarity: "unique", chance: 0.03 },
+          { name: "Dog Milk", img: "https://i.postimg.cc/MKxMpJnF/dogMilk.png", rarity: "unique", chance: 0.03 }
+        ]
+      },
+      {
+        id: "space",
+        name: "Space Box",
+        cost: 30,
+        img: "https://i.postimg.cc/28XhHyPn/spacebox.png",
+        foods: [
+          { name: "Moon", img: "https://i.postimg.cc/SQWG21p9/moon.png", rarity: "uncommon", chance: 30 },
+          { name: "Asteroid", img: "https://i.postimg.cc/bvtnXdyT/asteroid.png", rarity: "uncommon", chance: 25 },
+          { name: "Black Hole", img: "https://i.postimg.cc/7ZThhcF8/black-Hole.png", rarity: "uncommon", chance: 10 },
+          { name: "Saturn", img: "https://i.postimg.cc/85GjqHnc/saturn.png", rarity: "rare", chance: 20 },
+          { name: "Mars", img: "https://i.postimg.cc/76BwmMFC/mars.png", rarity: "rare", chance: 10 },
+          { name: "Sun", img: "https://i.postimg.cc/LsDp8367/sun.png", rarity: "epic", chance: 4 },
+          { name: "Space Globe", img: "https://i.postimg.cc/NGmtBqtG/space-Globe.png", rarity: "epic", chance: 4 },
+          { name: "Astronaut", img: "https://i.postimg.cc/PrNNq8MB/astronaut.png", rarity: "legendary", chance: 0.25 },
+          { name: "Meteoroids", img: "https://i.postimg.cc/90km9Jpm/meteoroids.png", rarity: "chroma", chance: 0.03 },
+          { name: "Alien Egg", img: "https://i.postimg.cc/dtCMLbX3/alienegg.png", rarity: "chroma", chance: 0.02 },
+          { name: "Stary Bot", img: "https://i.postimg.cc/dt9ZKTVs/staryBot.png", rarity: "chroma", chance: 0.05 },
+          { name: "Alien Capsule", img: "https://i.postimg.cc/kGk0vLJM/Alien-Capsule.webp", rarity: "unique", chance: 0.04 },
+          { name: "Rainbow Saturn", img: "https://i.postimg.cc/RVW0BYps/rainbow-Saturn.gif", rarity: "mystical", chance: 0.003 },
+          { name: "Spaceship", img: "https://i.postimg.cc/QM220nx8/Spaceship.gif", rarity: "mystical", chance: 0.002 },
+          { name: "Constellation", img: "https://i.postimg.cc/Cxfdj2jB/constellation.gif", rarity: "heavenly", chance: 0.0002 }
+        ]
+      },
+      {
+        id: "school",
+        name: "School Box",
+        cost: 30,
+        img: "https://i.postimg.cc/nrqVqRbP/schoolbox.png",
+        foods: [
+          { name: "Pencil", img: "https://i.postimg.cc/9rcNCPM2/pencil.png", rarity: "uncommon", chance: 30 },
+          { name: "Pencil Pouch", img: "https://i.postimg.cc/wtnGpSt4/pencil-Pouch.png", rarity: "uncommon", chance: 25 },
+          { name: "Notebook Paper", img: "https://i.postimg.cc/y3yQ0xL2/notebook-Paper.png", rarity: "rare", chance: 20 },
+          { name: "Note Pad", img: "https://i.postimg.cc/rdDP78pt/notePad.png", rarity: "rare", chance: 10 },
+          { name: "Markers", img: "https://i.postimg.cc/4n6FD2Xw/markers.png", rarity: "epic", chance: 5 },
+          { name: "Crayons", img: "https://i.postimg.cc/Vd4Z6SrC/crayons.png", rarity: "epic", chance: 4 },
+          { name: "Teachers Cup", img: "https://i.postimg.cc/8JWnPtMp/teachers-Cup.png", rarity: "legendary", chance: 3 },
+          { name: "Chalkboard", img: "https://i.postimg.cc/H8gvJX9Q/chalkboard.png", rarity: "legendary", chance: 2 },
+          { name: "Teachers Desk", img: "https://i.postimg.cc/tsScr19j/teachers-Desk.png", rarity: "chroma", chance: 0.05 },
+          { name: "Wise Cat", img: "https://i.postimg.cc/q7ZWP940/wiseCat.png", rarity: "unique", chance: 0.03 }
+        ]
+      },
+      {
+        id: "donut",
+        name: "Donut Box",
+        cost: 30,
+        img: "https://i.postimg.cc/zfBpP4fj/donutbox.png",
+        foods: [
+          { name: "Glaze Donut", img: "https://i.postimg.cc/W4GVHFd7/Glaze-Donut.webp", rarity: "uncommon", chance: 30 },
+          { name: "Strawberry Glazed Donut", img: "https://i.postimg.cc/B6Sr7h9q/Strawberry-Glazed-Donut.webp", rarity: "uncommon", chance: 25 },
+          { name: "Chocolate Glazed Donut", img: "https://i.postimg.cc/tgXv9Yrk/Chocolate-Glazed-Donut.webp", rarity: "uncommon", chance: 20 },
+          { name: "Blueberry Donut", img: "https://i.postimg.cc/HxN603Tv/Blueberry-Donut-1.webp", rarity: "rare", chance: 10 },
+          { name: "Blackberry Donut", img: "https://i.postimg.cc/mZvsBy7S/Blackberry-Donut.webp", rarity: "rare", chance: 10 },
+          { name: "Boston Creme", img: "https://i.postimg.cc/4x4FgY25/Boston-Creme.webp", rarity: "epic", chance: 5 },
+          { name: "Donut Holes", img: "https://i.postimg.cc/6qYnLpVW/Donut-Holes.webp", rarity: "legendary", chance: 1 },
+          { name: "Space Donut", img: "https://i.postimg.cc/CL9zy8Ky/Space-Donut.webp", rarity: "chroma", chance: 0.03 },
+          { name: "Cinnamon Roll", img: "https://i.postimg.cc/yN6W7wkM/cinnamon-Rolls.png", rarity: "chroma", chance: 0.03 },
+          { name: "Iced Blue Donut", img: "https://i.postimg.cc/GpCtt1Yq/Iced-Blue-Donut.webp", rarity: "chroma", chance: 0.03 },
+          { name: "Mystery Donut", img: "https://i.postimg.cc/25RG532M/mystery-Donut-swing-smooth.gif", rarity: "mystical", chance: 0.002 }
+        ]
+      },
+      {
+        id: "og",
+        name: "OG Box",
+        cost: 30,
+        img: "https://i.postimg.cc/VNGnr6m3/ogbox.png",
+        foods: [
+          { name: "Bagel Penguin", img: "https://i.postimg.cc/Fk7KBcZh/bagel-Penguin.png", rarity: "uncommon", chance: 30 },
+          { name: "Chip", img: "https://i.postimg.cc/8FNzVxHK/chip.png", rarity: "uncommon", chance: 30 },
+          { name: "History Penguin", img: "https://i.postimg.cc/8zc7hLFX/Picsart-25-08-18-11-05-20-062.webp", rarity: "uncommon", chance: 30 },
+          { name: "Noodles", img: "https://i.postimg.cc/18p32ypV/noodles.png", rarity: "rare", chance: 20 },
+          { name: "Octayden", img: "https://i.postimg.cc/7GB69XSB/octayden.png", rarity: "rare", chance: 20 },
+          { name: "Ayden", img: "https://i.postimg.cc/mt1D3Ykw/ayden.png", rarity: "rare", chance: 20 },
+          { name: "Fasty Jay", img: "https://i.postimg.cc/CxdBTLqj/Untitled-design-13.png", rarity: "epic", chance: 10 },
+          { name: "Mystical", img: "https://i.postimg.cc/zymfxyR1/mystical.png", rarity: "epic", chance: 10 },
+          { name: "Panda Flame", img: "https://i.postimg.cc/8cKptMwx/Screen-Shot-2025-08-01-at-6-49-29-AM.webp", rarity: "legendary", chance: 1 },
+          { name: "Spork", img: "https://i.postimg.cc/cKB6gdCG/spork.png", rarity: "legendary", chance: 1 },
+          { name: "SpeedGoodAlr", img: "https://i.postimg.cc/t7T7JQH8/speed-Good-Alr.png", rarity: "chroma", chance: 0.05 },
+          { name: "Caterpillar9", img: "https://i.postimg.cc/KkcjtC3k/caterpillar9.png", rarity: "chroma", chance: 0.05 },
+          { name: "Allonme", img: "https://i.postimg.cc/qRP5Yhfb/allonme.png", rarity: "chroma", chance: 0.05 },
+          { name: "Glitch", img: "https://i.postimg.cc/YqsCRP7q/glitch.webp", rarity: "unique", chance: 0.03 },
+          { name: "SuperMemes64", img: "https://i.postimg.cc/hjPKnpmG/Super-Memes-64.webp", rarity: "unique", chance: 0.03 },
+          { name: "Pugfan", img: "https://i.postimg.cc/HkM7Fv7X/pugfan.png", rarity: "unique", chance: 0.03 },
+          { name: "SOUNDGOD", img: "https://i.postimg.cc/R3dVCGpM/SOUNDGOD.gif", rarity: "mystical", chance: 0.003 },
+          { name: "CosmicDragonYT", img: "https://i.postimg.cc/Zqyc22vx/cosmicdragonyt.gif", rarity: "mystical", chance: 0.003 },
+          { name: "PrimeAndrew", img: "https://i.postimg.cc/XvVZKRzT/monkey.gif", rarity: "heavenly", chance: 0.002 },
+          { name: "Blooket Warrior", img: "https://i.postimg.cc/htNhD5Z3/Blooket-Warrior.gif", rarity: "heavenly", chance: 0.0002 }
+        ]
+      },
+      {
+        id: "frog",
+        name: "Frog Box",
+        cost: 30,
+        img: "https://i.postimg.cc/6378SfnK/frogbox.png",
+        foods: [
+          { name: "Blue Frog", img: "https://i.postimg.cc/kD0WT6th/bluefrog.png", rarity: "uncommon", chance: 30 },
+          { name: "Earth Frog", img: "https://i.postimg.cc/grC3gX6t/earthfrog.png", rarity: "uncommon", chance: 30 },
+          { name: "Chocolate Frog", img: "https://i.postimg.cc/jCpyMwJ8/chocolatefrog.png", rarity: "rare", chance: 10 },
+          { name: "Strawberry Frog", img: "https://i.postimg.cc/xqwL6Jbx/strawberryfrog.png", rarity: "rare", chance: 10 },
+          { name: "Football Frog", img: "https://i.postimg.cc/3Ws2t4Dt/footballfrog.png", rarity: "epic", chance: 5 },
+          { name: "Galaxy Frog", img: "https://i.postimg.cc/Dm91xJb5/galaxyfrog.png", rarity: "legendary", chance: 0.5 },
+          { name: "Warriet Frog", img: "https://i.postimg.cc/ThzntLW0/warrietfrog.png", rarity: "chroma", chance: 0.07 }
+        ]
+      },
+      {
+        id: "western",
+        name: "Western Box",
+        cost: 30,
+        img: "https://i.postimg.cc/GpxKtr5L/westernbox.png",
+        foods: [
+          { name: "Armadillo", img: "https://i.postimg.cc/XXRRjF7m/armadillo.webp", rarity: "uncommon", chance: 25.5 },
+          { name: "Rattle Snake", img: "https://i.postimg.cc/ThzzdmYB/rattlesnake.webp", rarity: "uncommon", chance: 25.5 },
+          { name: "Cactus Cat", img: "https://i.postimg.cc/ThzzdmY7/cactuscat.png", rarity: "uncommon", chance: 25.5 },
+          { name: "Root Beer", img: "https://i.postimg.cc/qqqwXdKP/rootbeer.png", rarity: "rare", chance: 10 },
+          { name: "Wheel", img: "https://i.postimg.cc/X7b2rt1v/wheel.png", rarity: "rare", chance: 10 },
+          { name: "Wanted Poster", img: "https://i.postimg.cc/GhJJfQPz/wantedposter.png", rarity: "epic", chance: 2 },
+          { name: "Sheriff", img: "https://i.postimg.cc/RhJV2XJb/sheriff.png", rarity: "legendary", chance: 0.25 },
+          { name: "Cactus", img: "https://i.postimg.cc/QtnDq1CB/cactus.png", rarity: "legendary", chance: 0.25 },
+          { name: "Golden Horseshoe", img: "https://i.postimg.cc/bwZ0vhc2/goldenhorseshoe.png", rarity: "chroma", chance: 0.05 },
+          { name: "Silver Horseshoe", img: "https://i.postimg.cc/d0mjb9KF/silverhorseshoe.png", rarity: "chroma", chance: 0.05 },
+          { name: "Owl Sheriff", img: "https://ac.blooket.com/marketassets/blooks/owlsheriff.svg", rarity: "chroma", chance: 0.03 },
+          { name: "Desert Snow Globe", img: "https://i.postimg.cc/5QFCGDX3/desert-Snowglobe.png", rarity: "unique", chance: 0.02 },
+          { name: "Sheriff Blooket Warrior", img: "https://i.postimg.cc/7fPZrZrq/Sheriff-Blooket-Warrior-YT.gif", rarity: "heavenly", chance: 0.00001 }
+        ]
+      },
+      {
+        id: "mexican",
+        name: "Mexican Box",
+        cost: 30,
+        img: "https://i.postimg.cc/W34Wg2kC/mexicanbox.png",
+        foods: [
+          { name: "Queso", img: "https://i.postimg.cc/qRdkm3j1/queso.png", rarity: "uncommon", chance: 20 },
+          { name: "Burrito", img: "https://i.postimg.cc/CKSPmMbf/burrito.png", rarity: "uncommon", chance: 20 },
+          { name: "Guacamole", img: "https://i.postimg.cc/ry0Bdmj4/quackamole.png", rarity: "uncommon", chance: 20 },
+          { name: "Salsa", img: "https://i.postimg.cc/rsXQR8yj/salsa.png", rarity: "uncommon", chance: 20 },
+          { name: "Flan", img: "https://i.postimg.cc/W3BTDJJk/flan.png", rarity: "rare", chance: 10 },
+          { name: "Taco Bowl", img: "https://i.postimg.cc/90XP3zLM/tacobowl.png", rarity: "rare", chance: 10 },
+          { name: "Chip", img: "https://i.postimg.cc/W4bJbxMW/chip.png", rarity: "rare", chance: 10 },
+          { name: "Taco", img: "https://i.postimg.cc/7PWvBzsx/taco.png", rarity: "epic", chance: 1 },
+          { name: "Sombrero", img: "https://i.postimg.cc/wBqgKphg/sombrero.png", rarity: "legendary", chance: 0.25 },
+          { name: "Margarita", img: "https://i.postimg.cc/C5BfjD5y/margarita.png", rarity: "chroma", chance: 0.02 }
+        ]
+      },
+      {
+        id: "color",
+        name: "Color Box",
+        cost: 30,
+        img: "https://i.postimg.cc/C5CKNpCs/colorbox.png",
+        foods: [
+          { name: "White", img: "https://i.postimg.cc/bwTzmtFs/blooktemplate.png", rarity: "uncommon", chance: 25 },
+          { name: "Red", img: "https://i.postimg.cc/q6VSKZBh/redblooktemplate.png", rarity: "uncommon", chance: 25 },
+          { name: "Orange", img: "https://i.postimg.cc/gLFQhBcx/orangeblooktemplate.png", rarity: "uncommon", chance: 25 },
+          { name: "Lava Orange", img: "https://i.postimg.cc/hQW6m34K/lavaorangeblooktemplate.png", rarity: "uncommon", chance: 25 },
+          { name: "Yellow", img: "https://i.postimg.cc/m1fJ96Zt/yellowblooktemplate.png", rarity: "uncommon", chance: 25 },
+          { name: "Lemonade Yellow", img: "https://i.postimg.cc/KkgCRybG/lemonadeyellowblooktemplate.png", rarity: "uncommon", chance: 25 },
+          { name: "Lemon Yellow", img: "https://i.postimg.cc/N9rZ5wtY/lemonyellowblooktemplate.png", rarity: "rare", chance: 15 },
+          { name: "Green", img: "https://i.postimg.cc/cty23511/greenblooktemplate.png", rarity: "rare", chance: 15 },
+          { name: "Mint Green", img: "https://i.postimg.cc/S2zHJp4s/mintgreenblooktemplate.png", rarity: "rare", chance: 15 },
+          { name: "Pickle Green", img: "https://i.postimg.cc/dkTgLKFV/picklegreenblooktemplate.png", rarity: "rare", chance: 15 },
+          { name: "Blue", img: "https://i.postimg.cc/CnTX86MK/blueblooktemplate.png", rarity: "epic", chance: 5 },
+          { name: "Sky Blue", img: "https://i.postimg.cc/MHvShhhH/skyblueblooktemplate.png", rarity: "epic", chance: 5 },
+          { name: "Space Blue", img: "https://i.postimg.cc/9Mx2gWNq/spaceblueblooktemplate.png", rarity: "epic", chance: 5 },
+          { name: "Cyan", img: "https://i.postimg.cc/GtHCZZZY/cyanblooktemplate.png", rarity: "epic", chance: 5 },
+          { name: "Pink", img: "https://i.postimg.cc/Vvd8333C/pinkblooktemplate.png", rarity: "legendary", chance: 0.5 },
+          { name: "Pink Lemonade", img: "https://i.postimg.cc/6qyXDDD7/pinklemonadeblooktemplate.png", rarity: "legendary", chance: 0.5 },
+          { name: "Hot Pink", img: "https://i.postimg.cc/L5nprrrZ/hotpinkblooktemplate.png", rarity: "legendary", chance: 0.5 },
+          { name: "Purple", img: "https://i.postimg.cc/PJPjBBBY/purpleblooktemplate.png", rarity: "chroma", chance: 0.03 },
+          { name: "Gray", img: "https://i.postimg.cc/LXySQH0P/grayblooktemplate.png", rarity: "chroma", chance: 0.03 },
+          { name: "Brown", img: "https://i.postimg.cc/j58T3sky/brownblooktemplate.png", rarity: "unique", chance: 0.01 },
+          { name: "Black", img: "https://i.postimg.cc/DZChp2Y4/blackblooktemplate.png", rarity: "unique", chance: 0.01 },
+          { name: "Rainbow", img: "https://i.postimg.cc/m2Qs0fkk/rainbow.gif", rarity: "heavenly", chance: 0.003 }
+        ]
+      },
+      {
+        id: "sports",
+        name: "Sports Box",
+        cost: 30,
+        img: "https://i.postimg.cc/PJYGjrbF/sportsbox.png",
+        foods: [
+          { name: "Basketball", img: "https://i.postimg.cc/nV4H4QHN/Basketball.png", rarity: "uncommon", chance: 25 },
+          { name: "Football", img: "https://i.postimg.cc/RC7M7nMs/Football.png", rarity: "uncommon", chance: 25 },
+          { name: "Birdie", img: "https://i.postimg.cc/prJRR3Gh/Birdie.png", rarity: "uncommon", chance: 25 },
+          { name: "Pickleball", img: "https://i.postimg.cc/gcVYV6YQ/Pickleball.png", rarity: "uncommon", chance: 25 },
+          { name: "Soccer Ball", img: "https://i.postimg.cc/QNQXQWXP/Soccer-Ball.png", rarity: "uncommon", chance: 25 },
+          { name: "Ping Pong Ball", img: "https://i.postimg.cc/8kR1RrpV/Ping-Pong-Ball.png", rarity: "uncommon", chance: 25 },
+          { name: "Cricket Paddle", img: "https://i.postimg.cc/nrGppNRm/Cricket-Paddle.png", rarity: "rare", chance: 15 },
+          { name: "Hockey Puck", img: "https://i.postimg.cc/L5322GCh/Hockey-Puck.png", rarity: "rare", chance: 15 },
+          { name: "Boxing Glove", img: "https://i.postimg.cc/Znx44X7C/Boxing-Glove.png", rarity: "rare", chance: 15 },
+          { name: "Bowling Ball", img: "https://i.postimg.cc/3rXKXDKL/Bowling-Ball.png", rarity: "epic", chance: 5 },
+          { name: "Boomerang", img: "https://i.postimg.cc/WzwTTxWG/Boomerang.png", rarity: "epic", chance: 5 },
+          { name: "Tennis Ball", img: "https://i.postimg.cc/y6mVmS1K/Tennis-Ball.png", rarity: "epic", chance: 5 },
+          { name: "Volleyball", img: "https://i.postimg.cc/mZYbYFbm/Volleyball.png", rarity: "legendary", chance: 0.5 },
+          { name: "Beach Ball", img: "https://i.postimg.cc/ZY8T8yT1/Beach-Ball.png", rarity: "legendary", chance: 0.5 },
+          { name: "Baseball", img: "https://i.postimg.cc/nV4H4QFp/Baseball.png", rarity: "chroma", chance: 0.05 },
+          { name: "Softball", img: "https://i.postimg.cc/SQ6y6zSh/Softball.png", rarity: "chroma", chance: 0.03 },
+          { name: "Glowing Tennis Ball", img: "https://i.postimg.cc/hj1CpX9M/Glowing-Tennis-Ball.gif", rarity: "mystical", chance: 0.005 },
+          { name: "Diamond Bowling Pins", img: "https://i.postimg.cc/DZPCBSqg/Diamond-Bowling-Pins.gif", rarity: "mystical", chance: 0.003 }
+        ]
+      },
+      {
+        id: "spooky",
+        name: "Spooky Box",
+        cost: 50,
+        img: "https://i.postimg.cc/28xKcsYH/spookybox.png",
+        foods: [
+          { name: "Devil Milk", img: "https://i.postimg.cc/tYCRHrfD/devil-Milk.png", rarity: "uncommon", chance: 30 },
+          { name: "Mummy Monster", img: "https://i.postimg.cc/nM1Vg8dC/Mummy-Monster-3.png", rarity: "uncommon", chance: 25 },
+          { name: "Caramel Ghost", img: "https://i.postimg.cc/SxwSvKMx/Caramel-Ghost.png", rarity: "rare", chance: 20 },
+          { name: "Pumpkin Cat", img: "https://i.postimg.cc/F1vsTFVM/Pumpkin-Cat.png", rarity: "rare", chance: 10 },
+          { name: "Pumpkin Pie", img: "https://i.postimg.cc/kRsHcvvg/Pumpkin-Pie-1.png", rarity: "epic", chance: 5 },
+          { name: "Devil Narwhal", img: "https://i.postimg.cc/BjjqjjJK/Devil-Narwhal-1.png", rarity: "epic", chance: 4 },
+          { name: "Witch Pot", img: "https://i.postimg.cc/GhxbFrGw/witchPot.png", rarity: "epic", chance: 4 },
+          { name: "Bot Ghost", img: "https://i.postimg.cc/QH48NQZD/Bot-Ghost-2.png", rarity: "legendary", chance: 3 },
+          { name: "Vampire Baby Shark", img: "https://i.postimg.cc/QdLmk17q/Untitled-design-17.png", rarity: "chroma", chance: 0.07 },
+          { name: "Black Cat", img: "https://i.postimg.cc/kgP3RMB0/blackCat.png", rarity: "chroma", chance: 0.07 },
+          { name: "Zombie Astronaut", img: "https://i.postimg.cc/Z5bq84bx/Zombie-Astronaut.webp", rarity: "chroma", chance: 0.07 },
+          { name: "Haunted Jack o Lantern", img: "https://i.postimg.cc/Fdj8f4fc/hauntedjacko-Lantern.png", rarity: "unique", chance: 0.04 },
+          { name: "Spooky Bot Ghost", img: "https://i.postimg.cc/63SV6Tc6/Spooky-Mega-Ghost-1.gif", rarity: "mystical", chance: 0.003 },
+          { name: "Spooky Skull", img: "https://i.postimg.cc/HkSCM9nq/spooky-Skull.png", rarity: "mystical", chance: 0.005 }
+        ]
+      },
+      {
+        id: "thanksgiving",
+        name: "Thanksgiving Box",
+        cost: 50,
+        img: "https://i.postimg.cc/wB1Cy2Qz/thanksgivingpack.png",
+        foods: [
+          { name: "Leaf Pile", img: "https://i.postimg.cc/hzJhG03f/autumncat2.webp", rarity: "uncommon", chance: 30 },
+          { name: "Cornucopia", img: "https://i.postimg.cc/svPx1xK9/costume2-1.webp", rarity: "uncommon", chance: 30 },
+          { name: "Pumpkins", img: "https://i.postimg.cc/67pykKrV/leafpile.webp", rarity: "rare", chance: 10 },
+          { name: "Squash", img: "https://i.postimg.cc/mcptRnjv/pumpkin.webp", rarity: "rare", chance: 10 },
+          { name: "Apple Pie", img: "https://i.postimg.cc/XNKMW8Hz/ApplePie.webp", rarity: "epic", chance: 5 },
+          { name: "Pilgram Hat", img: "https://i.postimg.cc/crG6sw7L/Pilgrim-Hat-1.webp", rarity: "epic", chance: 5 },
+          { name: "Turkey Leg", img: "https://i.postimg.cc/YjWhKbWP/breakfastcombo.webp", rarity: "legendary", chance: 1 },
+          { name: "Golden Pumpkin Pie", img: "https://i.postimg.cc/XBdJfYWW/Pumpkin-Pie-1.webp", rarity: "chroma", chance: 0.07 },
+          { name: "Autumn Snowglobe", img: "https://i.postimg.cc/kX5tPxks/autumn-snowglobe.png", rarity: "chroma", chance: 0.05 }
+        ]
+      },
+      {
+        id: "blizzard",
+        name: "Blizzard Box",
+        cost: 50,
+        img: "https://i.postimg.cc/NFBC4kTZ/blizzardbox.png",
+        foods: [
+          { name: "Cool Santa", img: "https://i.postimg.cc/hhHxx4Y3/cool-Santa.png", rarity: "uncommon", chance: 30 },
+          { name: "Holiday Cat", img: "https://i.postimg.cc/rzzCxPwz/Holiday-Cat-1.png", rarity: "uncommon", chance: 25 },
+          { name: "Holiday Frog", img: "https://i.postimg.cc/62brFdY9/Holiday-Frog-1.png", rarity: "rare", chance: 20 },
+          { name: "Santa Gummy", img: "https://i.postimg.cc/V0SqwdVX/Santa-Gummy-1.png", rarity: "rare", chance: 10 },
+          { name: "Golden Hot Chocolate", img: "https://i.postimg.cc/Rq81RLWd/Golden-Hot-Chocolate-1.png", rarity: "rare", chance: 5 },
+          { name: "Blooket Christmas Snow Globe", img: "https://i.postimg.cc/FfZgVtSk/snowglobe-svg-1.png", rarity: "epic", chance: 4 },
+          { name: "Evil Snowman", img: "https://i.postimg.cc/cgz3FdLC/Evil-Snowman-1.png", rarity: "epic", chance: 4 },
+          { name: "Santa Bot", img: "https://i.postimg.cc/yg8hffhQ/santaBot.png", rarity: "legendary", chance: 3 },
+          { name: "Island Snowglobe", img: "https://i.postimg.cc/m2QjDLzQ/islandsnowglobe.png", rarity: "unique", chance: 0.03 },
+          { name: "Turtle Clause", img: "https://i.postimg.cc/brqgyzGs/Turtle-Claus.gif", rarity: "mystical", chance: 0.009 }
+        ]
+      },
+      {
+        id: "lovely",
+        name: "Love Box",
+        cost: 500,
+        img: "https://i.postimg.cc/y6LytKzx/lovelybox.png",
+        foods: [
+          { name: "Lovely Cat", img: "https://i.postimg.cc/YSHb6qQB/Lovely-Cat.png", rarity: "chroma", chance: 10 },
+          { name: "Lovely Bot", img: "https://i.postimg.cc/wjvNR1W2/lovelybot.png", rarity: "chroma", chance: 10 },
+          { name: "Lovely Dog", img: "https://i.postimg.cc/L4x6YNG0/lovelydog.png", rarity: "chroma", chance: 10 },
+          { name: "Lovely Egg", img: "https://i.postimg.cc/jSbsBmfz/lovelyegg.png", rarity: "chroma", chance: 10 },
+          { name: "Lovely Milk", img: "https://i.postimg.cc/T34tKMcW/lovelymilk.png", rarity: "chroma", chance: 10 },
+          { name: "Lovely Goldfish", img: "https://i.postimg.cc/k4QrNXjL/lovelygoldfish.png", rarity: "chroma", chance: 10 },
+          { name: "Love Potion", img: "https://i.postimg.cc/MKcDgrwv/lovepotion.png", rarity: "chroma", chance: 10 },
+          { name: "Lovely Narwhal", img: "https://i.postimg.cc/YCMxj2gp/lovelynarwhal.png", rarity: "chroma", chance: 10 },
+          { name: "Lovely Crocodile", img: "https://i.postimg.cc/DzzHJPGt/lovelycrocodile.png", rarity: "chroma", chance: 10 },
+          { name: "Chocolate Heart", img: "https://i.postimg.cc/d37J2Kyt/chocolateheart.png", rarity: "chroma", chance: 10 }
+        ]
+      },
+      {
+        id: "lucky",
+        name: "Lucky Box",
+        cost: 500,
+        img: "https://i.postimg.cc/BnTLW51Y/luckybox.png",
+        foods: [
+          { name: "Lucky Clover", img: "https://i.postimg.cc/25XCg3Tx/image-(14).png", rarity: "chroma", chance: 100 }
+        ]
+      },
+      {
+        id: "spring",
+        name: "Spring Box",
+        cost: 500,
+        img: "https://i.postimg.cc/BnTLW51Y/luckybox.png",
+        foods: [
+          { name: "Spring Cat", img: "https://i.postimg.cc/rF6w80TP/Spring-Cat.png", rarity: "chroma", chance: 100 }
+        ]
+      },
+      {
+        id: "summer",
+        name: "Summer Box",
+        cost: 500,
+        img: "https://i.postimg.cc/BnTLW51Y/luckybox.png",
+        foods: [
+          { name: "Summer Cat", img: "https://i.postimg.cc/rF6w80TP/Spring-Cat.png", rarity: "chroma", chance: 100 }
+        ]
+      },
+      {
+        id: "ocean",
+        name: "Ocean Box",
+        cost: 500,
+        img: "https://i.postimg.cc/Zq1KxTSk/oceanlet.png",
+        foods: [
+          { name: "Oceanlet", img: "https://i.postimg.cc/Zq1KxTSk/oceanlet.png", rarity: "unique", chance: 100 }
+        ]
+      }
+    ];
+
+    /* =========================================================================
+       PROBABILITY MATH (Matches market (1).txt boost weighting)
+       - Non-uncommon items get multiplied by `boost` (1, 1.5, or 2).
+       - Single-box probability p = boostedWeight / sumOfBoostedWeights.
+       - Over N boxes, cumulative chance = min(100, (1 - (1 - p)^N) * 100).
+       ========================================================================= */
+    function getBoostedWeights(box, boost = 1) {
+      const b = Number(boost) || 1;
+      if (box.foods.length === 1 && box.foods[0].chance >= 100) {
+        return { weights: [1], total: 1, singleProbs: [1] };
+      }
+      const weights = box.foods.map(f => {
+        const mult = f.rarity !== "uncommon" ? b : 1;
+        return Number(f.chance || 0) * mult;
+      });
+      const total = weights.reduce((a, c) => a + c, 0) || 1;
+      const singleProbs = weights.map(w => w / total);
+      return { weights, total, singleProbs };
+    }
+
+    function cumulativeChanceUpTo100(singleProb, boxesCount) {
+      if (boxesCount <= 0 || singleProb <= 0) return 0;
+      if (singleProb >= 1) return 100;
+      const chancePct = (1 - Math.pow(1 - singleProb, boxesCount)) * 100;
+      return Math.min(100, Math.max(0, chancePct));
+    }
+
+    /* =========================================================================
+       SIMULATOR STATE & FUNCTIONS
+       ========================================================================= */
+    let simTokens = 1500;
+    let simInventory = [];
+
+    function setSimTokens(val) {
+      simTokens = Math.max(0, Math.floor(Number(val) || 0));
+      const inp = document.getElementById("sim-tokens-input");
+      if (inp) inp.value = simTokens;
+    }
+
+    function addSimTokens(amount) {
+      setSimTokens(simTokens + amount);
+      showToast(`Added +${amount} tokens!`);
+    }
+
+    function updateSimState() {
+      renderSimBoxes();
+    }
+
+    function pickWeightedFood(box, boost) {
+      const { weights, total } = getBoostedWeights(box, boost);
+      let r = Math.random() * total;
+      for (let i = 0; i < box.foods.length; i++) {
+        if (r < weights[i]) return box.foods[i];
+        r -= weights[i];
+      }
+      return box.foods[box.foods.length - 1];
+    }
+
+    function renderSimBoxes() {
+      const grid = document.getElementById("sim-boxes-grid");
+      if (!grid) return;
+      grid.innerHTML = MARKET_BOXES.map(box => `
+        <div class="box-card" onclick="openSimulatedBox('${box.id}')">
+          <img src="${box.img}" alt="${box.name}" />
+          <div class="box-card-name">${box.name}</div>
+          <div class="box-card-meta">
+            <span class="price-pill">${box.cost} Tokens</span>
+            <span class="count-pill">${box.foods.length} Foods</span>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function openSimulatedBox(boxId) {
+      const box = MARKET_BOXES.find(b => b.id === boxId);
+      if (!box) return;
+
+      const qtyInput = document.getElementById("sim-qty-input");
+      const boostSelect = document.getElementById("sim-boost-select");
+      const requestedQty = Math.max(1, Math.min(100, Math.floor(Number(qtyInput?.value) || 1)));
+      const boost = Number(boostSelect?.value || 1);
+
+      const affordable = Math.floor(simTokens / box.cost);
+      if (affordable < 1) {
+        showToast(`Not enough tokens for ${box.name} (${box.cost} needed).`);
+        return;
+      }
+
+      const actualQty = Math.min(requestedQty, affordable);
+      setSimTokens(simTokens - actualQty * box.cost);
+
+      let lastPull = null;
+      for (let i = 0; i < actualQty; i++) {
+        const pulled = pickWeightedFood(box, boost);
+        lastPull = { ...pulled, boxName: box.name };
+        simInventory.unshift(lastPull);
+      }
+
+      renderLatestPull(lastPull, actualQty);
+      renderSessionInventory();
+    }
+
+    function renderLatestPull(pull, qtyOpened) {
+      const stage = document.getElementById("sim-pull-stage");
+      if (!stage || !pull) return;
+      stage.innerHTML = `
+        <img src="${pull.img}" alt="${pull.name}" />
+        <div style="font-weight: 800; font-size: 1.05rem;">${pull.name}</div>
+        <div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 2px;">From ${pull.boxName}</div>
+        <span class="rarity-badge r-${pull.rarity}">${pull.rarity}</span>
+        ${qtyOpened > 1 ? `<div style="font-size: 0.75rem; color: var(--accent-cyan); margin-top: 8px;">Opened ${qtyOpened}x boxes</div>` : ""}
+      `;
+    }
+
+    function renderSessionInventory() {
+      const list = document.getElementById("sim-inventory-list");
+      const countEl = document.getElementById("sim-pulled-count");
+      if (countEl) countEl.textContent = `${simInventory.length} Pulled`;
+      if (!list) return;
+
+      if (simInventory.length === 0) {
+        list.innerHTML = `<p style="color: var(--text-muted); font-size: 0.82rem;">No Foods pulled yet.</p>`;
+        return;
+      }
+
+      list.innerHTML = simInventory.slice(0, 40).map(item => `
+        <div class="inv-item">
+          <div class="inv-left">
+            <img src="${item.img}" alt="${item.name}" />
+            <div>
+              <div style="font-weight: 600;">${item.name}</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted);">${item.boxName}</div>
+            </div>
+          </div>
+          <span class="rarity-badge r-${item.rarity}" style="margin-top:0;">${item.rarity}</span>
+        </div>
+      `).join("");
+    }
+
+    function clearSessionInventory() {
+      simInventory = [];
+      renderSessionInventory();
+    }
+
+    /* =========================================================================
+       CALCULATOR TO CHANCES
+       ========================================================================= */
+    function populateCalculatorBoxes() {
+      const sel = document.getElementById("calc-box");
+      if (!sel) return;
+      sel.innerHTML = MARKET_BOXES.map(b =>
+        `<option value="${b.id}">${b.name} (${b.cost} Tokens)</option>`
+      ).join("");
+    }
+
+    function renderCalculator() {
+      const tokens = Math.max(0, Math.floor(Number(document.getElementById("calc-tokens")?.value) || 0));
+      const boxId = document.getElementById("calc-box")?.value || MARKET_BOXES[0].id;
+      const boost = Number(document.getElementById("calc-boost")?.value || 1);
+
+      const box = MARKET_BOXES.find(b => b.id === boxId) || MARKET_BOXES[0];
+      const boxesCount = Math.floor(tokens / box.cost);
+      const usedTokens = boxesCount * box.cost;
+      const leftoverTokens = tokens - usedTokens;
+
+      document.getElementById("calc-box-cost").textContent = box.cost;
+      document.getElementById("calc-boxes-count").textContent = boxesCount.toLocaleString();
+      document.getElementById("calc-token-split").textContent = `${usedTokens.toLocaleString()} / ${leftoverTokens.toLocaleString()}`;
+
+      const { singleProbs } = getBoostedWeights(box, boost);
+      const tbody = document.getElementById("calc-table-body");
+      if (!tbody) return;
+
+      tbody.innerHTML = box.foods.map((food, idx) => {
+        const p = singleProbs[idx] || 0;
+        const cumPct = cumulativeChanceUpTo100(p, boxesCount);
+        const singlePct = (p * 100);
+        const formattedCum = cumPct >= 99.995 && boxesCount > 0 ? "100.00%" : `${cumPct.toFixed(2)}%`;
+
+        return `
+          <tr>
+            <td>
+              <div class="food-cell">
+                <img src="${food.img}" alt="${food.name}" />
+                <span>${food.name}</span>
+              </div>
+            </td>
+            <td><span class="rarity-badge r-${food.rarity}" style="margin-top:0;">${food.rarity}</span></td>
+            <td class="mono">${singlePct < 0.01 ? singlePct.toFixed(4) : singlePct.toFixed(2)}%</td>
+            <td>
+              <div class="prob-bar-wrap">
+                <div class="prob-bar-fill" style="width: ${cumPct.toFixed(1)}%;"></div>
+              </div>
+              <strong class="mono">${formattedCum}</strong>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    /* =========================================================================
+       VALUE GUIDE
+       ========================================================================= */
+    const RARITY_BASE_VALUE = {
+      uncommon: 15,
+      rare: 45,
+      epic: 140,
+      legendary: 450,
+      chroma: 1600,
+      unique: 3200,
+      mystical: 8500,
+      heavenly: 25000
+    };
+
+    function buildAllFoodsValuation() {
+      const rows = [];
+      MARKET_BOXES.forEach(box => {
+        const { singleProbs } = getBoostedWeights(box, 1);
+        box.foods.forEach((food, idx) => {
+          const p = Math.max(0.000001, singleProbs[idx] || 0.0001);
+          const rarityBase = RARITY_BASE_VALUE[food.rarity] || 20;
+          const rarityBonus = Math.round(Math.min(15000, (1 / p) * 1.8));
+          const boxTierFactor = box.cost / 30;
+          const estValue = Math.max(10, Math.round((rarityBase + rarityBonus) * (0.75 + 0.25 * boxTierFactor)));
+
+          rows.push({
+            name: food.name,
+            img: food.img,
+            boxName: box.name,
+            rarity: food.rarity,
+            chance: food.chance,
+            singleProbPct: p * 100,
+            estValue
+          });
+        });
+      });
+      return rows;
+    }
+
+    const ALL_FOOD_VALUES = buildAllFoodsValuation();
+
+    function renderValueGuide() {
+      const q = (document.getElementById("val-search")?.value || "").trim().toLowerCase();
+      const rarityFilter = document.getElementById("val-rarity")?.value || "all";
+      const sortBy = document.getElementById("val-sort")?.value || "value-desc";
+
+      let list = ALL_FOOD_VALUES.filter(item => {
+        const matchesRarity = rarityFilter === "all" || item.rarity === rarityFilter;
+        const matchesQuery = !q ||
+          item.name.toLowerCase().includes(q) ||
+          item.boxName.toLowerCase().includes(q) ||
+          item.rarity.toLowerCase().includes(q);
+        return matchesRarity && matchesQuery;
+      });
+
+      if (sortBy === "value-desc") list.sort((a, b) => b.estValue - a.estValue);
+      else if (sortBy === "value-asc") list.sort((a, b) => a.estValue - b.estValue);
+      else if (sortBy === "name-asc") list.sort((a, b) => a.name.localeCompare(b.name));
+      else if (sortBy === "chance-asc") list.sort((a, b) => a.singleProbPct - b.singleProbPct);
+
+      const tbody = document.getElementById("val-table-body");
+      if (!tbody) return;
+
+      tbody.innerHTML = list.map(item => `
+        <tr>
+          <td>
+            <div class="food-cell">
+              <img src="${item.img}" alt="${item.name}" />
+              <span>${item.name}</span>
+            </div>
+          </td>
+          <td style="color: var(--text-secondary);">${item.boxName}</td>
+          <td><span class="rarity-badge r-${item.rarity}" style="margin-top:0;">${item.rarity}</span></td>
+          <td class="mono">${item.singleProbPct < 0.01 ? item.singleProbPct.toFixed(4) : item.singleProbPct.toFixed(2)}%</td>
+          <td class="mono" style="font-weight: 700; color: var(--accent-emerald);">~${item.estValue.toLocaleString()} Tokens</td>
+        </tr>
+      `).join("");
+    }
+
+    /* =========================================================================
+       NAVIGATION & UTILITIES
+       ========================================================================= */
+    const ROUTE_MAP = {
+      "index.html": "view-index",
+      "games.html": "view-games",
+      "market-sim.html": "view-market-sim",
+      "calculator.html": "view-calculator",
+      "value-guide.html": "view-value-guide"
+    };
+
+    function navigateTo(route) {
+      const targetId = ROUTE_MAP[route] || "view-index";
+      document.querySelectorAll(".view-section").forEach(sec => sec.classList.remove("active"));
+      const activeSec = document.getElementById(targetId);
+      if (activeSec) activeSec.classList.add("active");
+
+      document.querySelectorAll(".nav-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.getAttribute("data-route") === route);
+      });
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function copyText(text, msg) {
+      navigator.clipboard?.writeText(text).catch(() => {});
+      showToast(msg || "Copied!");
+    }
+
+    let toastTimer = null;
+    function showToast(message) {
+      const el = document.getElementById("toast");
+      if (!el) return;
+      el.textContent = message;
+      el.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+    }
+
+    /* Initialize */
+    syncAgeDisplay();
+    renderGames("all");
+    renderSimBoxes();
+    renderSessionInventory();
+    populateCalculatorBoxes();
+    renderCalculator();
+    renderValueGuide();
+  </script>
+</body>
+</html>
